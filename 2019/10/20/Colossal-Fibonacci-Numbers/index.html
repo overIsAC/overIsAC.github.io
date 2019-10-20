@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="柠檬树下蒟蒻果">
 <meta property="og:description" content="昨晚紫书看到,以为很水,要写的时候一堆麻烦QwQ题目链接(紫书P316)  题目大意:Fibonacci数列f(0) = 0f(1) = 1f(i) = f(i - 1) + f(i - 1), (i &amp;gt;= 2)给出a, b, n,求f($a^b$) mod n.">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-10-20T02:42:20.337Z">
+<meta property="og:updated_time" content="2019-10-20T02:58:39.977Z">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="柠檬树下蒟蒻果" type="application/atom+xml">
@@ -69,6 +69,8 @@
 				<li><a href="/tags/%E5%9B%BE%E8%AE%BA/">图论</a></li>
 	        
 				<li><a href="/tags/%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91/">最小生成树</a></li>
+	        
+				<li><a href="/tags/%E7%83%82%E4%BB%A3%E7%A0%81/">烂代码</a></li>
 	        
 			</ul>
 		</nav>
@@ -132,6 +134,8 @@
 			
 				
 			
+				
+			
 			
 			
 			<nav class="header-nav">
@@ -148,17 +152,19 @@
 				<ul style="width: 70%">
 				
 				
-					<li style="width: 16.666666666666668%"><a href="/">主页</a></li>
+					<li style="width: 14.285714285714286%"><a href="/">主页</a></li>
 		        
-					<li style="width: 16.666666666666668%"><a href="/tags/%E9%9A%8F%E7%AC%94/">随笔</a></li>
+					<li style="width: 14.285714285714286%"><a href="/tags/%E9%9A%8F%E7%AC%94/">随笔</a></li>
 		        
-					<li style="width: 16.666666666666668%"><a href="/tags/%E9%A2%98%E8%A7%A3/">题解</a></li>
+					<li style="width: 14.285714285714286%"><a href="/tags/%E9%A2%98%E8%A7%A3/">题解</a></li>
 		        
-					<li style="width: 16.666666666666668%"><a href="/tags/%E6%95%B0%E5%AD%A6/">数学</a></li>
+					<li style="width: 14.285714285714286%"><a href="/tags/%E6%95%B0%E5%AD%A6/">数学</a></li>
 		        
-					<li style="width: 16.666666666666668%"><a href="/tags/%E5%9B%BE%E8%AE%BA/">图论</a></li>
+					<li style="width: 14.285714285714286%"><a href="/tags/%E5%9B%BE%E8%AE%BA/">图论</a></li>
 		        
-					<li style="width: 16.666666666666668%"><a href="/tags/%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91/">最小生成树</a></li>
+					<li style="width: 14.285714285714286%"><a href="/tags/%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91/">最小生成树</a></li>
+		        
+					<li style="width: 14.285714285714286%"><a href="/tags/%E7%83%82%E4%BB%A3%E7%A0%81/">烂代码</a></li>
 		        
 				</ul>
 			</nav>
@@ -207,7 +213,7 @@
 <h2 id="题目大意"><a href="#题目大意" class="headerlink" title="题目大意:"></a>题目大意:</h2><p>Fibonacci数列<br>f(0) = 0<br>f(1) = 1<br>f(i) = f(i - 1) + f(i - 1), (i &gt;= 2)<br>给出a, b, n,求f($a^b$) mod n.</p>
 <a id="more"></a>
 <hr>
-<h2 id="解法"><a href="#解法" class="headerlink" title="解法:"></a>解法:</h2><p>设F(i) = f(i) % n<br>那么当F(i) = F(0), F(i + 1) = F(1)时, 0~i-1就是一个循环节<br>这个循环节多长呢?余数最多n个,所以最多$n^2$项开始循环<br>n最大是1000,所以循环节最大就是1e6<br>算出循环节后,再算出$a^b$是第几项就行了 (就是F($a^b$)=F($a^b$ mod n))</p>
+<h2 id="解法"><a href="#解法" class="headerlink" title="解法:"></a>解法:</h2><p>设F(i) = f(i) % n<br>那么当F(i) = F(0), F(i + 1) = F(1)时, 0<del>i-1就是一个循环节<br>这个循环节多长呢?余数最多n个,所以最多$n^2$项(0</del>n-1中选两次)开始循环<br>n最大是1000,所以循环节最大就是1e6<br>算出循环节后,再算出$a^b$是第几项就行了 (就是F($a^b$)=F($a^b$ mod n))</p>
 <p>题目给出的a和b爆了long long……但是unsigned long long还是能存得下<br>unsigned long long的占位符是%llu,或者直接cin读入</p>
 <hr>
 <h2 id="代码"><a href="#代码" class="headerlink" title="代码:"></a>代码:</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#include &lt;bits/stdc++.h&gt;</span></span><br><span class="line"></span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">typedef unsigned long long ull;</span><br><span class="line"></span><br><span class="line">ull qpow(ull q, ull n, ull mod) &#123;</span><br><span class="line">    ull ans = 1 % mod;</span><br><span class="line">    <span class="keyword">while</span> (n) &#123;</span><br><span class="line">        <span class="keyword">if</span> (n &amp; 1) ans = ans * q % mod;</span><br><span class="line">        q = q % mod * q % mod;</span><br><span class="line">        n &gt;&gt;= 1;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">ull a, b;</span><br><span class="line">int n;</span><br><span class="line">int Fib[1000010];</span><br><span class="line"></span><br><span class="line">int <span class="function"><span class="title">main</span></span>() &#123;</span><br><span class="line">    int t;</span><br><span class="line">    scanf(<span class="string">"%d"</span>, &amp;t);</span><br><span class="line">    <span class="keyword">while</span> (t--) &#123;</span><br><span class="line">        scanf(<span class="string">"%llu%llu%d"</span>, &amp;a, &amp;b, &amp;n);</span><br><span class="line">        Fib[1] = 1 % n;                     //n有可能是1</span><br><span class="line">        int tot;</span><br><span class="line">        <span class="keyword">for</span> (int i = 2;; ++i) &#123;</span><br><span class="line">            Fib[i] = (Fib[i - 1] + Fib[i - 2]) % n;</span><br><span class="line">            <span class="keyword">if</span> (Fib[i] == Fib[1] &amp;&amp; Fib[i - 1] == Fib[0]) &#123;</span><br><span class="line">                tot = i - 1;        //0~i-2是一个循环节,长度是i-1</span><br><span class="line">                <span class="built_in">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, Fib[qpow(a % tot, b, tot)]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">return</span> 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -296,6 +302,15 @@
 
   
 <nav id="article-nav">
+  
+    <a href="/2019/10/20/Joseph-Ring/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          Joseph Ring
+        
+      </div>
+    </a>
   
   
     <a href="/2019/10/19/Fibonacci-Tree/" id="article-nav-older" class="article-nav-link-wrap">
@@ -469,15 +484,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">图论</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">最小生成树</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">烂代码</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
             
             <div class="clearfix"></div>
