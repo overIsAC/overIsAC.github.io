@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="柠檬树下蒟蒻果">
 <meta property="og:description" content="记录一道前天5小时自闭赛没写出的题，之前讲座做过,QWQ题目链接  题目大意：n个点，m条边(起点、终点、权重)。任选一定量的边，构成生成树，并且符合题目给出的Fibonacci数中的其中一个，则输出”Yes”，否则输出”No”。">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-10-20T01:19:29.471Z">
+<meta property="og:updated_time" content="2019-10-20T16:11:13.590Z">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="柠檬树下蒟蒻果" type="application/atom+xml">
@@ -69,6 +69,8 @@
 				<li><a href="/tags/%E5%9B%BE%E8%AE%BA/">图论</a></li>
 	        
 				<li><a href="/tags/%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91/">最小生成树</a></li>
+	        
+				<li><a href="/tags/EasyX/">EasyX</a></li>
 	        
 				<li><a href="/tags/%E7%83%82%E4%BB%A3%E7%A0%81/">烂代码</a></li>
 	        
@@ -136,6 +138,8 @@
 			
 				
 			
+				
+			
 			
 			
 			<nav class="header-nav">
@@ -152,19 +156,21 @@
 				<ul style="width: 70%">
 				
 				
-					<li style="width: 14.285714285714286%"><a href="/">主页</a></li>
+					<li style="width: 12.5%"><a href="/">主页</a></li>
 		        
-					<li style="width: 14.285714285714286%"><a href="/tags/%E9%9A%8F%E7%AC%94/">随笔</a></li>
+					<li style="width: 12.5%"><a href="/tags/%E9%9A%8F%E7%AC%94/">随笔</a></li>
 		        
-					<li style="width: 14.285714285714286%"><a href="/tags/%E9%A2%98%E8%A7%A3/">题解</a></li>
+					<li style="width: 12.5%"><a href="/tags/%E9%A2%98%E8%A7%A3/">题解</a></li>
 		        
-					<li style="width: 14.285714285714286%"><a href="/tags/%E6%95%B0%E5%AD%A6/">数学</a></li>
+					<li style="width: 12.5%"><a href="/tags/%E6%95%B0%E5%AD%A6/">数学</a></li>
 		        
-					<li style="width: 14.285714285714286%"><a href="/tags/%E5%9B%BE%E8%AE%BA/">图论</a></li>
+					<li style="width: 12.5%"><a href="/tags/%E5%9B%BE%E8%AE%BA/">图论</a></li>
 		        
-					<li style="width: 14.285714285714286%"><a href="/tags/%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91/">最小生成树</a></li>
+					<li style="width: 12.5%"><a href="/tags/%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91/">最小生成树</a></li>
 		        
-					<li style="width: 14.285714285714286%"><a href="/tags/%E7%83%82%E4%BB%A3%E7%A0%81/">烂代码</a></li>
+					<li style="width: 12.5%"><a href="/tags/EasyX/">EasyX</a></li>
+		        
+					<li style="width: 12.5%"><a href="/tags/%E7%83%82%E4%BB%A3%E7%A0%81/">烂代码</a></li>
 		        
 				</ul>
 			</nav>
@@ -213,7 +219,7 @@
 <h2 id="题目大意："><a href="#题目大意：" class="headerlink" title="题目大意："></a>题目大意：</h2><p>n个点，m条边(起点、终点、权重)。任选一定量的边，构成生成树，并且符合题目给出的Fibonacci数中的其中一个，则输出”Yes”，否则输出”No”。</p>
 <a id="more"></a>
 <hr>
-<h2 id="解法"><a href="#解法" class="headerlink" title="解法:"></a>解法:</h2><p>求一遍最小生成树，最大生成树，判断下是否存在至少一个Fibonacci数在这个两个值的中间。<br>假设符合，就可以使最小生成树(或者最大生成树)中的一些边换掉，使得总权重刚好等于一个Fibonacci数。<br><del>(具体怎么换,那就脑补下?emmm)</del></p>
+<h2 id="解法"><a href="#解法" class="headerlink" title="解法:"></a>解法:</h2><p>求一遍最小生成树，最大生成树，判断下是否存在至少一个Fibonacci数在这个两个值的中间。<br>假设符合，就可以把最小生成树(或者最大生成树)中的一些边换掉，使得总权重刚好等于一个Fibonacci数。<br><del>(具体怎么换,那就脑补下?emmm)</del></p>
 <hr>
 <p>生成树: n个点用n - 1条边连成的图<br>最小生成树:生成树中所有边权加起来最小的生成树<br>最大生出树:和最小生成树相反</p>
 <hr>
@@ -499,6 +505,10 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">EasyX</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">烂代码</a>
               </li>
              
@@ -564,6 +574,10 @@ MathJax.Hub.Queue(function() {
           
             <li class="search-li">
               <a href="https://zhakul.top/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>z师傅</a>
+            </li>
+          
+            <li class="search-li">
+              <a href="https://zhangshenblog.cn" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>ZSdalao</a>
             </li>
           
         </ul>
