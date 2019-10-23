@@ -9,14 +9,14 @@
   <title>Fibonacci Tree(HDU-4786) | 柠檬树下蒟蒻果</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="记录一道前天5小时自闭赛没写出的题，之前讲座做过,QWQ题目链接  题目大意：n个点，m条边(起点、终点、权重)。任选一定量的边，构成生成树，并且符合题目给出的Fibonacci数中的其中一个，则输出”Yes”，否则输出”No”。">
-<meta name="keywords" content="题解,图论,最小生成树">
+<meta name="keywords" content="算法题,题解,图论,最小生成树">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Fibonacci Tree(HDU-4786)">
 <meta property="og:url" content="https:&#x2F;&#x2F;overisac.github.io&#x2F;2019&#x2F;10&#x2F;19&#x2F;Fibonacci-Tree&#x2F;index.html">
 <meta property="og:site_name" content="柠檬树下蒟蒻果">
 <meta property="og:description" content="记录一道前天5小时自闭赛没写出的题，之前讲座做过,QWQ题目链接  题目大意：n个点，m条边(起点、终点、权重)。任选一定量的边，构成生成树，并且符合题目给出的Fibonacci数中的其中一个，则输出”Yes”，否则输出”No”。">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-10-20T16:11:13.590Z">
+<meta property="og:updated_time" content="2019-10-23T14:20:26.439Z">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="柠檬树下蒟蒻果" type="application/atom+xml">
@@ -60,17 +60,7 @@
 			
 				<li><a href="/">主页</a></li>
 	        
-				<li><a href="/tags/%E9%9A%8F%E7%AC%94/">随笔</a></li>
-	        
-				<li><a href="/tags/%E9%A2%98%E8%A7%A3/">题解</a></li>
-	        
-				<li><a href="/tags/%E8%B4%AA%E5%BF%83/">贪心</a></li>
-	        
-				<li><a href="/tags/%E6%95%B0%E5%AD%A6/">数学</a></li>
-	        
-				<li><a href="/tags/%E5%9B%BE%E8%AE%BA/">图论</a></li>
-	        
-				<li><a href="/tags/%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91/">最小生成树</a></li>
+				<li><a href="/tags/%E7%AE%97%E6%B3%95%E9%A2%98/">算法题</a></li>
 	        
 				<li><a href="/tags/EasyX/">EasyX</a></li>
 	        
@@ -134,16 +124,6 @@
 			
 				
 			
-				
-			
-				
-			
-				
-			
-				
-			
-				
-			
 			
 			
 			<nav class="header-nav">
@@ -160,23 +140,13 @@
 				<ul style="width: 70%">
 				
 				
-					<li style="width: 11.11111111111111%"><a href="/">主页</a></li>
+					<li style="width: 25%"><a href="/">主页</a></li>
 		        
-					<li style="width: 11.11111111111111%"><a href="/tags/%E9%9A%8F%E7%AC%94/">随笔</a></li>
+					<li style="width: 25%"><a href="/tags/%E7%AE%97%E6%B3%95%E9%A2%98/">算法题</a></li>
 		        
-					<li style="width: 11.11111111111111%"><a href="/tags/%E9%A2%98%E8%A7%A3/">题解</a></li>
+					<li style="width: 25%"><a href="/tags/EasyX/">EasyX</a></li>
 		        
-					<li style="width: 11.11111111111111%"><a href="/tags/%E8%B4%AA%E5%BF%83/">贪心</a></li>
-		        
-					<li style="width: 11.11111111111111%"><a href="/tags/%E6%95%B0%E5%AD%A6/">数学</a></li>
-		        
-					<li style="width: 11.11111111111111%"><a href="/tags/%E5%9B%BE%E8%AE%BA/">图论</a></li>
-		        
-					<li style="width: 11.11111111111111%"><a href="/tags/%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91/">最小生成树</a></li>
-		        
-					<li style="width: 11.11111111111111%"><a href="/tags/EasyX/">EasyX</a></li>
-		        
-					<li style="width: 11.11111111111111%"><a href="/tags/%E7%83%82%E4%BB%A3%E7%A0%81/">烂代码</a></li>
+					<li style="width: 25%"><a href="/tags/%E7%83%82%E4%BB%A3%E7%A0%81/">烂代码</a></li>
 		        
 				</ul>
 			</nav>
@@ -220,7 +190,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>记录一道前天5小时自闭赛没写出的题<del>，之前讲座做过,QWQ</del><br><a href="https://vjudge.net/problem/HDU-4786" target="_blank" rel="noopener">题目链接</a></p>
+        <hr>
+<p>记录一道前天5小时自闭赛没写出的题<del>，之前讲座做过,QWQ</del><br><a href="https://vjudge.net/problem/HDU-4786" target="_blank" rel="noopener">题目链接</a></p>
 <hr>
 <h2 id="题目大意："><a href="#题目大意：" class="headerlink" title="题目大意："></a>题目大意：</h2><p>n个点，m条边(起点、终点、权重)。任选一定量的边，构成生成树，并且符合题目给出的Fibonacci数中的其中一个，则输出”Yes”，否则输出”No”。</p>
 <a id="more"></a>
@@ -243,6 +214,10 @@
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">算法题</a>
+        		</li>
+      		 
         		<li class="article-tag-list-item">
         			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">题解</a>
         		</li>
@@ -493,6 +468,10 @@ MathJax.Hub.Queue(function() {
             <input type="checkbox" q-on="click:toggleTag(e)" q-attr="checked:showTags">
           </label>
           <ul class="article-tag-list" q-show="showTags">
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">算法题</a>
+              </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">题解</a>

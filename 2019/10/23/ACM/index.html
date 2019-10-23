@@ -6,17 +6,16 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://overisac.github.io">
-  <title>Views Matter(CodeForces-1061B) | 柠檬树下蒟蒻果</title>
+  <title>ACM | 柠檬树下蒟蒻果</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="一道1500分的cf题想了好久……题目链接  题意给出n、m,n行m列.接下来n个数,第i个数代表第i列i个格子每行每列最少一个,最多能拿走多少">
-<meta name="keywords" content="算法题,贪心">
+  <meta name="description" content="今晚听师兄讲他们的经验我也好想去比赛(可惜被解散了)坚持到明年省赛希望那时的水平能让我有信心继续坚持">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Views Matter(CodeForces-1061B)">
-<meta property="og:url" content="https:&#x2F;&#x2F;overisac.github.io&#x2F;2019&#x2F;10&#x2F;22&#x2F;Views-Matter&#x2F;index.html">
+<meta property="og:title" content="ACM">
+<meta property="og:url" content="https:&#x2F;&#x2F;overisac.github.io&#x2F;2019&#x2F;10&#x2F;23&#x2F;ACM&#x2F;index.html">
 <meta property="og:site_name" content="柠檬树下蒟蒻果">
-<meta property="og:description" content="一道1500分的cf题想了好久……题目链接  题意给出n、m,n行m列.接下来n个数,第i个数代表第i列i个格子每行每列最少一个,最多能拿走多少">
+<meta property="og:description" content="今晚听师兄讲他们的经验我也好想去比赛(可惜被解散了)坚持到明年省赛希望那时的水平能让我有信心继续坚持">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-10-23T14:20:41.758Z">
+<meta property="og:updated_time" content="2019-10-23T14:27:58.982Z">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="柠檬树下蒟蒻果" type="application/atom+xml">
@@ -161,20 +160,20 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-Views-Matter" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-ACM" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
           
   
     <h1 class="article-title" itemprop="name">
-      Views Matter(CodeForces-1061B)
+      ACM
     </h1>
   
 
           
-          <a href="/2019/10/22/Views-Matter/" class="archive-article-date">
-  	<time datetime="2019-10-22T14:19:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-22</time>
+          <a href="/2019/10/23/ACM/" class="archive-article-date">
+  	<time datetime="2019-10-23T14:22:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-23</time>
 </a>
           
             
@@ -190,16 +189,9 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <hr>
-<p>一道1500分的cf题想了好久……<br><a href="https://vjudge.net/problem/CodeForces-1061B" target="_blank" rel="noopener">题目链接</a></p>
+        <p>今晚听师兄讲他们的经验<br>我也好想去比赛(可惜被解散了)<br>坚持到明年省赛<br>希望那时的水平<br>能让我有信心继续坚持</p>
 <hr>
-<h2 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h2><p>给出n、m,n行m列.接下来n个数,<br>第i个数代表第i列i个格子<br>每行每列最少一个,最多能拿走多少</p>
-<hr>
-<a id="more"></a>
-<hr>
-<p>答案=总数-留下的<br><del>思维混乱,就不解释了</del><br><del>看我”题解”标签都没有</del></p>
-<hr>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#include &lt;bits/stdc++.h&gt;</span></span><br><span class="line"></span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line"><span class="comment">#define ll long long</span></span><br><span class="line"></span><br><span class="line">const int N = 10 + 1e5;</span><br><span class="line"></span><br><span class="line">ll arr[N], ans;</span><br><span class="line">int n, m;</span><br><span class="line"></span><br><span class="line">int <span class="function"><span class="title">main</span></span>() &#123;</span><br><span class="line">    scanf(<span class="string">"%d%d"</span>, &amp;n, &amp;m);</span><br><span class="line">    <span class="keyword">for</span> (int i = 0; i &lt; n; ++i) &#123;</span><br><span class="line">        scanf(<span class="string">"%lld"</span>, &amp;arr[i]);</span><br><span class="line">        ans += arr[i] - 1;</span><br><span class="line">    &#125;</span><br><span class="line">    int lst = 0;</span><br><span class="line">    sort(arr, arr + n);</span><br><span class="line">    <span class="keyword">for</span> (int i = 0; i &lt; n; ++i) &#123;</span><br><span class="line">        <span class="keyword">if</span> (arr[i] &gt; lst)</span><br><span class="line">            ++lst;</span><br><span class="line">    &#125;</span><br><span class="line">    lst = arr[n - 1] - lst;</span><br><span class="line">    ans -= lst;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%lld"</span>, ans);</span><br><span class="line">    <span class="built_in">return</span> 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
       
 
       
@@ -207,21 +199,6 @@
     <div class="article-info article-info-index">
       
       
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">算法题</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">贪心</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
       
 
       
@@ -272,7 +249,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=https://overisac.github.io/2019/10/22/Views-Matter/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=https://overisac.github.io/2019/10/23/ACM/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -286,18 +263,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2019/10/23/Xor-Paths/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          Xor-Paths(CodeForces-1006F)
-        
-      </div>
-    </a>
   
-  
-    <a href="/2019/10/22/Klotski/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Klotski</div>
+    <a href="/2019/10/23/Xor-Paths/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Xor-Paths(CodeForces-1006F)</div>
       <i class="icon-circle-right"></i>
     </a>
   
