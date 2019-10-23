@@ -6,17 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://overisac.github.io">
-  <title>博客搭建 | 柠檬树下蒟蒻果</title>
+  <title>Xor-Paths(CodeForces-1006F) | 柠檬树下蒟蒻果</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="电脑win7系统，用hexo+GitHub搭博客末尾是我跟的视频，如果有错，死不承认emmm命令都是在控制台输入。Win+R,然后输入cmd就能打开控制台懒可以直接复制括号里的命令">
-<meta name="keywords" content="随笔">
+  <meta name="description" content="2400的cf题,看到这个值以为很难读完题目,觉得很简单,就是双向深搜然而还是T了然后挂个fread竟然wa在样例1(╥╯^╰╥)题目链接  题目意思给出n, m, k, n$\times$m的矩阵问从左上到右下有多少条路径路径上点的总异或值等于k只能往右或往下走">
+<meta name="keywords" content="题解,搜索">
 <meta property="og:type" content="article">
-<meta property="og:title" content="博客搭建">
-<meta property="og:url" content="https:&#x2F;&#x2F;overisac.github.io&#x2F;2019&#x2F;10&#x2F;18&#x2F;%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA&#x2F;index.html">
+<meta property="og:title" content="Xor-Paths(CodeForces-1006F)">
+<meta property="og:url" content="https:&#x2F;&#x2F;overisac.github.io&#x2F;2019&#x2F;10&#x2F;23&#x2F;Xor-Paths&#x2F;index.html">
 <meta property="og:site_name" content="柠檬树下蒟蒻果">
-<meta property="og:description" content="电脑win7系统，用hexo+GitHub搭博客末尾是我跟的视频，如果有错，死不承认emmm命令都是在控制台输入。Win+R,然后输入cmd就能打开控制台懒可以直接复制括号里的命令">
+<meta property="og:description" content="2400的cf题,看到这个值以为很难读完题目,觉得很简单,就是双向深搜然而还是T了然后挂个fread竟然wa在样例1(╥╯^╰╥)题目链接  题目意思给出n, m, k, n$\times$m的矩阵问从左上到右下有多少条路径路径上点的总异或值等于k只能往右或往下走">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-10-23T09:48:51.409Z">
+<meta property="og:updated_time" content="2019-10-23T09:48:17.721Z">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="柠檬树下蒟蒻果" type="application/atom+xml">
@@ -191,20 +191,20 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-博客搭建" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-Xor-Paths" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
           
   
     <h1 class="article-title" itemprop="name">
-      博客搭建
+      Xor-Paths(CodeForces-1006F)
     </h1>
   
 
           
-          <a href="/2019/10/18/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/" class="archive-article-date">
-  	<time datetime="2019-10-18T10:10:51.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-18</time>
+          <a href="/2019/10/23/Xor-Paths/" class="archive-article-date">
+  	<time datetime="2019-10-23T09:07:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-23</time>
 </a>
           
             
@@ -221,35 +221,16 @@
     <div class="article-entry" itemprop="articleBody">
       
         <hr>
-<p>电脑win7系统，用hexo+GitHub搭博客<br>末尾是我跟的视频，<del>如果有错，死不承认emmm</del><br>命令都是在控制台输入。Win+R,然后输入cmd就能打开控制台<br><del>懒</del>可以直接复制括号里的命令</p>
+<p>2400的cf题,看到这个值以为很难<br>读完题目,觉得很简单,就是双向深搜<br>然而还是T了<br><del>然后挂个fread竟然wa在样例1</del><br>(╥╯^╰╥)<br><a href="https://vjudge.net/problem/CodeForces-1006F" target="_blank" rel="noopener">题目链接</a></p>
 <hr>
+<h2 id="题目意思"><a href="#题目意思" class="headerlink" title="题目意思"></a>题目意思</h2><p>给出n, m, k, n$\times$m的矩阵<br>问从左上到右下有多少条路径<br>路径上点的总异或值等于k<br>只能往右或往下走</p>
 <a id="more"></a>
-<h2 id="步骤："><a href="#步骤：" class="headerlink" title="步骤："></a>步骤：</h2><p>1、下载安装Node.js(百度就有了)<br>2、利用npm(安装nodejs就有了)下载cnpm<br>(npm install -g cnpm –registry=<a href="https://registry.npmtaobao.org" target="_blank" rel="noopener">https://registry.npmtaobao.org</a>)<br>3、再用cnpm安装hexo<br>(cnpm install -g hexo-cli)</p>
-<p>4、新建一个文件夹blog(放博客的地方，该文件夹想放哪放哪),之后的操作在该文件夹<br>5、使用hexo生成博客<br>win:   (hexo init)<br>Linux：(sudo hexo init)<br>6、使用”hexo s”，把显示的网址输到浏览器(得在放博客的地方才能使用”hexo s”)(可能要多刷新两次)</p>
-<p>7、生成一篇文章(hexo n “blog”)，就会在sources文件夹的_posts文件生成一个blog.md(Markdown文件)<br>(LaTex，vscode，vim可编辑)<br>8、使用”hexo clean”，”hexo g”，重复步骤6就能看到文章(好像保存下,刷新网页就能看到了。<del>写这篇记录时不知道emmm</del>)</p>
-<p>9、点在GitHub右上角的+，然后点第一个”New repsository”。在”Repository name”下面的框输入”xxx.githut.io”，xxx必须是你的github名(例如”overisac.github.io”)，就产生了一个空仓库</p>
-<p>10、在blog文件夹安装git一个部署插件<br>(cnpm install –save hexo-deployer-git)</p>
-<p>11、现在需要设置”_config.yml”(在blog文件夹下)，”_config.yml”末尾加上(<br>  type: git<br>  repo: <a href="https://github.com/xxx/xxx.github.io" target="_blank" rel="noopener">https://github.com/xxx/xxx.github.io</a><br>  branch: master<br>)<br>(xxx.github.io就是在刚才GitHub建仓库填的，两个xxx相同)</p>
-<p>12、使用”hexo d”，然后就能用”xxx.githut.io”了(输入到浏览器)</p>
-<p>(如果不满意，就把blog<del>干掉</del>删了，重来)</p>
 <hr>
-<h2 id="换主题："><a href="#换主题：" class="headerlink" title="换主题："></a>换主题：</h2><p>1、clone 一个主题到指定文件夹<br>git clone <a href="https://github.com/litten/hexo-theme-yilia.git" target="_blank" rel="noopener">https://github.com/litten/hexo-theme-yilia.git</a> themes/yilia<br>2、修改”_config.yml”<br>把theme 后面的”landscape”(初始主题)换成”yilia”(你要换的主题)<br>3、<br>hexo clean<br>hexo g<br>hexo s<br>就能看到新主题</p>
+<h2 id="解法"><a href="#解法" class="headerlink" title="解法"></a>解法</h2><p>由于m, n最大值是20,如果直接深搜<br>复杂度是O($2^{m+n}$),也就是$2^{40}$,妥妥的TLE<br>但是如果双向搜索,起点搜一半,终点往回搜一半<br>复杂度就会降很多,O($2^{\frac{m+n}{2}}$),也就是$2^{20}$</p>
 <hr>
-<h2 id="命令："><a href="#命令：" class="headerlink" title="命令："></a>命令：</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">查看node的版本:           node -v</span><br><span class="line">查看npm的版本:            npm -v</span><br><span class="line">查看cnpm的版本:           cnpm -v</span><br><span class="line">查看hexo的版本:           hexo -v</span><br><span class="line">建新文件夹到当前路径:       mkdir name          (name就是要取的文件夹名字)</span><br><span class="line">启动博客(预览):           hexo s               (会显示一个网址http://localhost:4000，在浏览器打开即可，Ctrl + C断开)</span><br><span class="line">新建文章:                 hexo -n <span class="string">"article"</span>   (article就是文章名)</span><br><span class="line">清理:                    hexo clean</span><br><span class="line">生成:                    hexo g</span><br><span class="line">部署到远端:               hexo d</span><br><span class="line"></span><br><span class="line">查看当前文件夹的文件:       dir</span><br><span class="line">进入某个文件夹:            <span class="built_in">cd</span> xxx</span><br><span class="line">退出:                    <span class="built_in">cd</span> /</span><br></pre></td></tr></table></figure>
-<p><del>(不会对齐啊！QwQ)</del><br><del>(听说Markdown没有对齐哎！QwQ)</del></p>
+<p>路径很多,答案会爆int<br>由于有些路径在双向搜索终点值一样,可以用map</p>
 <hr>
-<p>第5步需要git (官网下载慢可以到C:\Windows\System32\drivers\etc的host文件加上<br>192.30.253.113 github.com<br>11.238.159.92 git.node5.mirror.et2sqa<br>)</p>
-<p>第12步报错 (git需要设置用户名和邮箱地址，配置ssh(百度大法))</p>
-<hr>
-<h3 id="参考"><a href="#参考" class="headerlink" title="参考:"></a>参考:</h3><p><a href="https://www.bilibili.com/video/av44544186" target="_blank" rel="noopener">https://www.bilibili.com/video/av44544186</a></p>
-<hr>
-<hr>
-<p>19-10-22</p>
-<p>发现相对路径,绝对路径什么的,博客插入图片方法都不行……</p>
-<p>在网上看到一个方法是,先在GitHub建了新repo,把图片上传到这个repo<br>在把download的链接放到文章,就有图片了<br>(具体等我有时间在补上)</p>
-<hr>
-<hr>
-
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#include &lt;bits/stdc++.h&gt;</span></span><br><span class="line"></span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line"><span class="comment">#define ll long long</span></span><br><span class="line"></span><br><span class="line">ll mp[21][21];</span><br><span class="line">int n, m;</span><br><span class="line">ll k;</span><br><span class="line"></span><br><span class="line">map&lt;ll, int&gt; s[21][21];     //记录起点搜一半路程的异或值</span><br><span class="line"></span><br><span class="line">int st;</span><br><span class="line">ll ans;</span><br><span class="line"></span><br><span class="line">void dfs1(int x, int y, ll sum, int step) &#123;</span><br><span class="line">    <span class="keyword">if</span> (step &gt;= st) &#123;       //一半路程返回</span><br><span class="line">        ++s[x][y][sum];</span><br><span class="line">        <span class="built_in">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (x + 1 &lt; n) dfs1(x + 1, y, sum ^ mp[x + 1][y], step + 1);</span><br><span class="line">    <span class="keyword">if</span> (y + 1 &lt; m) dfs1(x, y + 1, sum ^ mp[x][y + 1], step + 1);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void dfs2(int x, int y, ll sum) &#123;</span><br><span class="line">    <span class="keyword">if</span> (s[x][y].size()) &#123;   </span><br><span class="line">        <span class="keyword">if</span> (s[x][y].count(sum ^ mp[x][y] ^ k))  //mp[x][y]的值会异或两次,所以再异或一次抵消</span><br><span class="line">            ans += s[x][y][sum ^ mp[x][y] ^ k];</span><br><span class="line">        <span class="built_in">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (x - 1 &gt;= 0) dfs2(x - 1, y, sum ^ mp[x - 1][y]);</span><br><span class="line">    <span class="keyword">if</span> (y - 1 &gt;= 0) dfs2(x, y - 1, sum ^ mp[x][y - 1]);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int <span class="function"><span class="title">main</span></span>() &#123;</span><br><span class="line">    scanf(<span class="string">"%d%d%lld"</span>, &amp;n, &amp;m, &amp;k);</span><br><span class="line">    <span class="keyword">for</span> (int i = 0; i &lt; n; ++i)</span><br><span class="line">        <span class="keyword">for</span> (int j = 0; j &lt; m; ++j)</span><br><span class="line">            scanf(<span class="string">"%lld"</span>, &amp;mp[i][j]);</span><br><span class="line">    st = n + m &gt;&gt; 1;    //加号优先级大于位运算符</span><br><span class="line"></span><br><span class="line">    dfs1(0, 0, mp[0][0], 1);</span><br><span class="line">    dfs2(n - 1, m - 1, mp[n - 1][m - 1]);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%lld"</span>, ans);</span><br><span class="line">    <span class="built_in">return</span> 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
 
       
@@ -262,7 +243,11 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">题解</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">搜索</a>
         		</li>
       		
 		</ul>
@@ -318,7 +303,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=https://overisac.github.io/2019/10/18/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=https://overisac.github.io/2019/10/23/Xor-Paths/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -332,15 +317,11 @@
   
 <nav id="article-nav">
   
-    <a href="/2019/10/19/Fibonacci-Tree/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          Fibonacci Tree(HDU-4786)
-        
-      </div>
-    </a>
   
+    <a href="/2019/10/22/Views-Matter/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Views Matter(CodeForces-1061B)</div>
+      <i class="icon-circle-right"></i>
+    </a>
   
 </nav>
 
