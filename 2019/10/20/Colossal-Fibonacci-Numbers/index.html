@@ -6,17 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://overisac.github.io">
-  <title>Colossal Fibonacci Numbers! | 柠檬树下蒟蒻果</title>
+  <title>Colossal Fibonacci Numbers!(UVA-11582) | 柠檬树下蒟蒻果</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="昨晚紫书看到,以为很水,要写的时候一堆麻烦QwQ题目链接(紫书P316)  题目大意:Fibonacci数列f(0) = 0f(1) = 1f(i) = f(i - 1) + f(i - 1), (i &amp;gt;= 2)给出a, b, n,求f($a^b$) mod n.">
+  <meta name="description" content="昨晚紫书看到,以为很水,要写的时候一堆麻烦QwQ题目链接(紫书P316)  题意:Fibonacci数列f(0) = 0f(1) = 1f(i) = f(i - 1) + f(i - 1), (i &amp;gt;= 2)给出a, b, n,求f($a^b$) mod n.">
 <meta name="keywords" content="算法题,题解,数学">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Colossal Fibonacci Numbers!">
+<meta property="og:title" content="Colossal Fibonacci Numbers!(UVA-11582)">
 <meta property="og:url" content="https:&#x2F;&#x2F;overisac.github.io&#x2F;2019&#x2F;10&#x2F;20&#x2F;Colossal-Fibonacci-Numbers&#x2F;index.html">
 <meta property="og:site_name" content="柠檬树下蒟蒻果">
-<meta property="og:description" content="昨晚紫书看到,以为很水,要写的时候一堆麻烦QwQ题目链接(紫书P316)  题目大意:Fibonacci数列f(0) = 0f(1) = 1f(i) = f(i - 1) + f(i - 1), (i &amp;gt;= 2)给出a, b, n,求f($a^b$) mod n.">
+<meta property="og:description" content="昨晚紫书看到,以为很水,要写的时候一堆麻烦QwQ题目链接(紫书P316)  题意:Fibonacci数列f(0) = 0f(1) = 1f(i) = f(i - 1) + f(i - 1), (i &amp;gt;= 2)给出a, b, n,求f($a^b$) mod n.">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-10-23T14:20:24.415Z">
+<meta property="og:updated_time" content="2019-10-25T12:50:47.786Z">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="柠檬树下蒟蒻果" type="application/atom+xml">
@@ -168,7 +168,7 @@
           
   
     <h1 class="article-title" itemprop="name">
-      Colossal Fibonacci Numbers!
+      Colossal Fibonacci Numbers!(UVA-11582)
     </h1>
   
 
@@ -192,7 +192,7 @@
       
         <p>昨晚紫书看到,以为很水<del>,要写的时候一堆麻烦QwQ</del><br><a href="https://vjudge.net/problem/UVA-11582" target="_blank" rel="noopener">题目链接</a><br>(紫书P316)</p>
 <hr>
-<h2 id="题目大意"><a href="#题目大意" class="headerlink" title="题目大意:"></a>题目大意:</h2><p>Fibonacci数列<br>f(0) = 0<br>f(1) = 1<br>f(i) = f(i - 1) + f(i - 1), (i &gt;= 2)<br>给出a, b, n,求f($a^b$) mod n.</p>
+<h2 id="题意"><a href="#题意" class="headerlink" title="题意:"></a>题意:</h2><p>Fibonacci数列<br>f(0) = 0<br>f(1) = 1<br>f(i) = f(i - 1) + f(i - 1), (i &gt;= 2)<br>给出a, b, n,求f($a^b$) mod n.</p>
 <a id="more"></a>
 <hr>
 <h2 id="解法"><a href="#解法" class="headerlink" title="解法:"></a>解法:</h2><p>设F(i) = f(i) % n<br>那么当F(i) = F(0), F(i + 1) = F(1)时, 0<del>i-1就是一个循环节<br>这个循环节多长呢?余数最多n个,所以最多$n^2$项(0</del>n-1中选两次)开始循环<br>n最大是1000,所以循环节最大就是1e6<br>算出循环节后,再算出$a^b$是第几项就行了 (就是F($a^b$)=F($a^b$ mod n))</p>
@@ -319,6 +319,19 @@
             </div>
         </div>
         
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#题意"><span class="toc-number">1.</span> <span class="toc-text">题意:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#解法"><span class="toc-number">2.</span> <span class="toc-text">解法:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#代码"><span class="toc-number">3.</span> <span class="toc-text">代码:</span></a></li></ol>
+                    </div>
+                </span>
+            </div>
+        </div>
         
     </div>
 </aside>
@@ -462,6 +475,10 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">算法题</a>
               </li>
              
@@ -498,7 +515,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+                <a href="javascript:void(0)" class="js-tag color3">二分</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">0/1分数规划</a>
               </li>
             
             <div class="clearfix"></div>

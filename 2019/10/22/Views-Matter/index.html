@@ -8,15 +8,15 @@
   <link rel="dns-prefetch" href="https://overisac.github.io">
   <title>Views Matter(CodeForces-1061B) | 柠檬树下蒟蒻果</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="一道1500分的cf题想了好久……题目链接  题意给出n、m,n行m列.接下来n个数,第i个数代表第i列i个格子每行每列最少一个,最多能拿走多少">
+  <meta name="description" content="一道1500分的cf题想了好久……题目链接  题意:给出n、m,n行m列.接下来n个数,第i个数代表第i列i个格子每行每列最少一个,最多能拿走多少">
 <meta name="keywords" content="算法题,贪心">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Views Matter(CodeForces-1061B)">
 <meta property="og:url" content="https:&#x2F;&#x2F;overisac.github.io&#x2F;2019&#x2F;10&#x2F;22&#x2F;Views-Matter&#x2F;index.html">
 <meta property="og:site_name" content="柠檬树下蒟蒻果">
-<meta property="og:description" content="一道1500分的cf题想了好久……题目链接  题意给出n、m,n行m列.接下来n个数,第i个数代表第i列i个格子每行每列最少一个,最多能拿走多少">
+<meta property="og:description" content="一道1500分的cf题想了好久……题目链接  题意:给出n、m,n行m列.接下来n个数,第i个数代表第i列i个格子每行每列最少一个,最多能拿走多少">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-10-23T14:20:41.758Z">
+<meta property="og:updated_time" content="2019-10-25T13:55:27.332Z">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="柠檬树下蒟蒻果" type="application/atom+xml">
@@ -193,13 +193,13 @@
         <hr>
 <p>一道1500分的cf题想了好久……<br><a href="https://vjudge.net/problem/CodeForces-1061B" target="_blank" rel="noopener">题目链接</a></p>
 <hr>
-<h2 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h2><p>给出n、m,n行m列.接下来n个数,<br>第i个数代表第i列i个格子<br>每行每列最少一个,最多能拿走多少</p>
+<h2 id="题意"><a href="#题意" class="headerlink" title="题意:"></a>题意:</h2><p>给出n、m,n行m列.接下来n个数,<br>第i个数代表第i列i个格子<br>每行每列最少一个,最多能拿走多少</p>
 <hr>
 <a id="more"></a>
 <hr>
 <p>答案=总数-留下的<br><del>思维混乱,就不解释了</del><br><del>看我”题解”标签都没有</del></p>
 <hr>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#include &lt;bits/stdc++.h&gt;</span></span><br><span class="line"></span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line"><span class="comment">#define ll long long</span></span><br><span class="line"></span><br><span class="line">const int N = 10 + 1e5;</span><br><span class="line"></span><br><span class="line">ll arr[N], ans;</span><br><span class="line">int n, m;</span><br><span class="line"></span><br><span class="line">int <span class="function"><span class="title">main</span></span>() &#123;</span><br><span class="line">    scanf(<span class="string">"%d%d"</span>, &amp;n, &amp;m);</span><br><span class="line">    <span class="keyword">for</span> (int i = 0; i &lt; n; ++i) &#123;</span><br><span class="line">        scanf(<span class="string">"%lld"</span>, &amp;arr[i]);</span><br><span class="line">        ans += arr[i] - 1;</span><br><span class="line">    &#125;</span><br><span class="line">    int lst = 0;</span><br><span class="line">    sort(arr, arr + n);</span><br><span class="line">    <span class="keyword">for</span> (int i = 0; i &lt; n; ++i) &#123;</span><br><span class="line">        <span class="keyword">if</span> (arr[i] &gt; lst)</span><br><span class="line">            ++lst;</span><br><span class="line">    &#125;</span><br><span class="line">    lst = arr[n - 1] - lst;</span><br><span class="line">    ans -= lst;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%lld"</span>, ans);</span><br><span class="line">    <span class="built_in">return</span> 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码:"></a>代码:</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#include &lt;bits/stdc++.h&gt;</span></span><br><span class="line"></span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line"><span class="comment">#define ll long long</span></span><br><span class="line"></span><br><span class="line">const int N = 10 + 1e5;</span><br><span class="line"></span><br><span class="line">ll arr[N], ans;</span><br><span class="line">int n, m;</span><br><span class="line"></span><br><span class="line">int <span class="function"><span class="title">main</span></span>() &#123;</span><br><span class="line">    scanf(<span class="string">"%d%d"</span>, &amp;n, &amp;m);</span><br><span class="line">    <span class="keyword">for</span> (int i = 0; i &lt; n; ++i) &#123;</span><br><span class="line">        scanf(<span class="string">"%lld"</span>, &amp;arr[i]);</span><br><span class="line">        ans += arr[i] - 1;</span><br><span class="line">    &#125;</span><br><span class="line">    int lst = 0;</span><br><span class="line">    sort(arr, arr + n);</span><br><span class="line">    <span class="keyword">for</span> (int i = 0; i &lt; n; ++i) &#123;</span><br><span class="line">        <span class="keyword">if</span> (arr[i] &gt; lst)</span><br><span class="line">            ++lst;</span><br><span class="line">    &#125;</span><br><span class="line">    lst = arr[n - 1] - lst;</span><br><span class="line">    ans -= lst;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%lld"</span>, ans);</span><br><span class="line">    <span class="built_in">return</span> 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
 
       
@@ -316,6 +316,19 @@
             </div>
         </div>
         
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#题意"><span class="toc-number">1.</span> <span class="toc-text">题意:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#代码"><span class="toc-number">2.</span> <span class="toc-text">代码:</span></a></li></ol>
+                    </div>
+                </span>
+            </div>
+        </div>
         
     </div>
 </aside>
@@ -459,6 +472,10 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">算法题</a>
               </li>
              
@@ -495,7 +512,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+                <a href="javascript:void(0)" class="js-tag color3">二分</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">0/1分数规划</a>
               </li>
             
             <div class="clearfix"></div>
