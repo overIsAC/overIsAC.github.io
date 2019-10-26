@@ -9,14 +9,14 @@
   <title>gpa-(Gym-247731A) | 柠檬树下蒟蒻果</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="和poj2976差不多做过,然而训练赛时忘了……题目链接  题意:给出n,k.n门课程,第i门的课程的学分是s[i],分数是c[i]删除最多k门课程使得$\frac{\sum s[i]c[i]}{\sum s[i]}$最大问这个最大值是多少">
-<meta name="keywords" content="算法题,二分,0&#x2F;1分数规划">
+<meta name="keywords" content="算法题,题解,二分,0&#x2F;1分数规划">
 <meta property="og:type" content="article">
 <meta property="og:title" content="gpa-(Gym-247731A)">
 <meta property="og:url" content="https:&#x2F;&#x2F;overisac.github.io&#x2F;2019&#x2F;10&#x2F;25&#x2F;gpa-Gym&#x2F;index.html">
 <meta property="og:site_name" content="柠檬树下蒟蒻果">
 <meta property="og:description" content="和poj2976差不多做过,然而训练赛时忘了……题目链接  题意:给出n,k.n门课程,第i门的课程的学分是s[i],分数是c[i]删除最多k门课程使得$\frac{\sum s[i]c[i]}{\sum s[i]}$最大问这个最大值是多少">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-10-25T13:54:23.496Z">
+<meta property="og:updated_time" content="2019-10-25T14:28:15.620Z">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="柠檬树下蒟蒻果" type="application/atom+xml">
@@ -45,8 +45,11 @@
 <div class="overlay" style="background: #4d4d4d"></div>
 <div class="intrude-less">
 	<header id="header" class="inner">
-		<a href="/" class="profilepic">
-			<img src="/img/诗乃.jpg" class="js-avatar">
+		
+			<div id="ds-reset" class="ds-post-self">
+			<div class="ds-avatar" >
+			<img src="/img/诗乃.jpg">
+			
 		</a>
 		<hgroup>
 		  <h1 class="header-author"><a href="/">蒜拧孟</a></h1>
@@ -63,8 +66,6 @@
 				<li><a href="/tags/%E7%AE%97%E6%B3%95%E9%A2%98/">算法题</a></li>
 	        
 				<li><a href="/tags/EasyX/">EasyX</a></li>
-	        
-				<li><a href="/tags/%E7%83%82%E4%BB%A3%E7%A0%81/">烂代码</a></li>
 	        
 			</ul>
 		</nav>
@@ -122,8 +123,6 @@
 			
 				
 			
-				
-			
 			
 			
 			<nav class="header-nav">
@@ -140,13 +139,11 @@
 				<ul style="width: 70%">
 				
 				
-					<li style="width: 25%"><a href="/">主页</a></li>
+					<li style="width: 33.333333333333336%"><a href="/">主页</a></li>
 		        
-					<li style="width: 25%"><a href="/tags/%E7%AE%97%E6%B3%95%E9%A2%98/">算法题</a></li>
+					<li style="width: 33.333333333333336%"><a href="/tags/%E7%AE%97%E6%B3%95%E9%A2%98/">算法题</a></li>
 		        
-					<li style="width: 25%"><a href="/tags/EasyX/">EasyX</a></li>
-		        
-					<li style="width: 25%"><a href="/tags/%E7%83%82%E4%BB%A3%E7%A0%81/">烂代码</a></li>
+					<li style="width: 33.333333333333336%"><a href="/tags/EasyX/">EasyX</a></li>
 		        
 				</ul>
 			</nav>
@@ -205,7 +202,7 @@
 <hr>
 <p>那么这就能二分答案(也就是二分L)</p>
 <hr>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#include &lt;bits/stdc++.h&gt;</span></span><br><span class="line"></span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">const int N = 10 + 2e5;</span><br><span class="line"></span><br><span class="line">int n, k;</span><br><span class="line">double s[N], c[N];</span><br><span class="line">double p[N];</span><br><span class="line"></span><br><span class="line">bool pd(double mid) &#123;</span><br><span class="line">    <span class="keyword">for</span> (int i = 0; i &lt; n; ++i)</span><br><span class="line">        p[i] = s[i] * c[i] - mid * s[i];</span><br><span class="line">    sort(p, p + n, greater&lt;double&gt;());      //降序</span><br><span class="line"></span><br><span class="line">    double sum = 0;</span><br><span class="line">    <span class="keyword">for</span> (int i = 0; i &lt; n - k; ++i)         //选最大的n-k个</span><br><span class="line">        sum += p[i];</span><br><span class="line">    <span class="built_in">return</span> sum &gt;= 0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int <span class="function"><span class="title">main</span></span>() &#123;</span><br><span class="line">    scanf(<span class="string">"%d%d"</span>, &amp;n, &amp;k);</span><br><span class="line">    <span class="keyword">for</span> (int i = 0; i &lt; n; ++i)</span><br><span class="line">        scanf(<span class="string">"%lf"</span>, &amp;s[i]);</span><br><span class="line">    <span class="keyword">for</span> (int i = 0; i &lt; n; ++i)</span><br><span class="line">        scanf(<span class="string">"%lf"</span>, &amp;c[i]);</span><br><span class="line">        </span><br><span class="line">    double l = 0, r = 1000, mid;            //r最大是1000 * 1000 / 1000 = 1000</span><br><span class="line">    <span class="keyword">while</span> (r - l &gt; eps) &#123;</span><br><span class="line">        mid = (l + r) / 2;</span><br><span class="line">        <span class="keyword">if</span> (pd(mid)) l = mid;</span><br><span class="line">        <span class="keyword">else</span> r = mid;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%f"</span>, l);</span><br><span class="line">    <span class="built_in">return</span> 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#include &lt;bits/stdc++.h&gt;</span></span><br><span class="line"></span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">const int N = 10 + 2e5;</span><br><span class="line"></span><br><span class="line">int n, k;</span><br><span class="line">double s[N], c[N];</span><br><span class="line">double p[N];</span><br><span class="line"></span><br><span class="line">bool pd(double mid) &#123;</span><br><span class="line">    <span class="keyword">for</span> (int i = 0; i &lt; n; ++i)</span><br><span class="line">        p[i] = s[i] * c[i] - mid * s[i];</span><br><span class="line">    sort(p, p + n, greater&lt;double&gt;());      //降序</span><br><span class="line"></span><br><span class="line">    double sum = 0;</span><br><span class="line">    <span class="keyword">for</span> (int i = 0; i &lt; n - k; ++i)         //看推导过程只要sum大于0,所以尽量少的选(即选n-k个),选最大的</span><br><span class="line">        sum += p[i];</span><br><span class="line">    <span class="built_in">return</span> sum &gt;= 0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int <span class="function"><span class="title">main</span></span>() &#123;</span><br><span class="line">    scanf(<span class="string">"%d%d"</span>, &amp;n, &amp;k);</span><br><span class="line">    <span class="keyword">for</span> (int i = 0; i &lt; n; ++i)</span><br><span class="line">        scanf(<span class="string">"%lf"</span>, &amp;s[i]);</span><br><span class="line">    <span class="keyword">for</span> (int i = 0; i &lt; n; ++i)</span><br><span class="line">        scanf(<span class="string">"%lf"</span>, &amp;c[i]);</span><br><span class="line">        </span><br><span class="line">    double l = 0, r = 1000, mid;            //r最大是1000 * 1000 / 1000 = 1000</span><br><span class="line">    <span class="keyword">while</span> (r - l &gt; eps) &#123;</span><br><span class="line">        mid = (l + r) / 2;</span><br><span class="line">        <span class="keyword">if</span> (pd(mid)) l = mid;</span><br><span class="line">        <span class="keyword">else</span> r = mid;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%f"</span>, l);</span><br><span class="line">    <span class="built_in">return</span> 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料:"></a>参考资料:</h3><p>算法竞赛进阶指南 P185</p>
 
       
@@ -221,6 +218,10 @@
 			 
         		<li class="article-tag-list-item">
         			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">算法题</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">题解</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
@@ -297,6 +298,15 @@
 
   
 <nav id="article-nav">
+  
+    <a href="/2019/10/25/take-Gym/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          take(Gym-247731F)
+        
+      </div>
+    </a>
   
   
     <a href="/2019/10/25/max-Gym/" id="article-nav-older" class="article-nav-link-wrap">
@@ -491,14 +501,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">图论</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">最小生成树</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">EasyX</a>
               </li>
              
@@ -507,11 +509,27 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">贪心</a>
+                <a href="javascript:void(0)" class="js-tag color3">图论</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">搜索</a>
+                <a href="javascript:void(0)" class="js-tag color1">最小生成树</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">树状数组</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">线段树</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">概率/期望</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">贪心</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -520,6 +538,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">0/1分数规划</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">搜索</a>
               </li>
             
             <div class="clearfix"></div>
@@ -575,7 +597,7 @@ MathJax.Hub.Queue(function() {
             </li>
           
             <li class="search-li">
-              <a href="https://jay6.cn/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>杰哥</a>
+              <a href="https://jay6.cn/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>杰哥(杰哥好久前就说等他打开博客,然而)</a>
             </li>
           
             <li class="search-li">
@@ -594,7 +616,7 @@ MathJax.Hub.Queue(function() {
     
     	<section class="tools-section tools-section-me" q-show="aboutme">
   	  	
-  	  		<div class="aboutme-wrap" id="js-aboutme">目前就读于中山学院&lt;br&gt;每天被虐得死去活来&lt;br&gt;&lt;br&gt;开blog调节下生活</div>
+  	  		<div class="aboutme-wrap" id="js-aboutme">目前就读于中山学院&lt;br&gt;每天被虐得死去活来&lt;br&gt;&lt;br&gt;开blog调节下生活&lt;br&gt;&lt;br&gt;(如果本blog的代码颜色不习惯,&lt;br&gt;复制出去看?或者教我调颜色?)</div>
   	  	
     	</section>
     
