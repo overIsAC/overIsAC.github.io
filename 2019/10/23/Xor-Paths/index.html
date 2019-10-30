@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="柠檬树下蒟蒻果">
 <meta property="og:description" content="2400的cf题,看到这个值以为很难读完题目,觉得很简单,就是双向深搜然而还是T了然后挂个fread竟然wa在样例1(╥╯^╰╥)题目链接  题意:给出n, m, k, n$\times$m的矩阵问从左上到右下有多少条路径路径上点的总异或值等于k只能往右或往下走">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-10-26T08:28:33.982Z">
+<meta property="og:updated_time" content="2019-10-30T14:13:22.929Z">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="柠檬树下蒟蒻果" type="application/atom+xml">
@@ -197,7 +197,7 @@
 <hr>
 <p>路径很多,答案会爆int<br>由于有些路径在搜索的终点值一样,可以用map</p>
 <hr>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码:"></a>代码:</h2><figure class="highlight bash"><figcaption><span>$\color&#123;#FF0000&#125;&#123;红色字&#125;$</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#include &lt;bits/stdc++.h&gt;</span></span><br><span class="line"></span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line"><span class="comment">#define ll long long</span></span><br><span class="line"></span><br><span class="line">ll mp[21][21];</span><br><span class="line">int n, m;</span><br><span class="line">ll k;</span><br><span class="line"></span><br><span class="line">map&lt;ll, int&gt; s[21][21];     //记录起点搜一半路程的异或值</span><br><span class="line"></span><br><span class="line">int st;</span><br><span class="line">ll ans;</span><br><span class="line"></span><br><span class="line">void dfs1(int x, int y, ll sum, int step) &#123;</span><br><span class="line">    <span class="keyword">if</span> (step &gt;= st) &#123;       //一半路程返回</span><br><span class="line">        ++s[x][y][sum];</span><br><span class="line">        <span class="built_in">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (x + 1 &lt; n) dfs1(x + 1, y, sum ^ mp[x + 1][y], step + 1);</span><br><span class="line">    <span class="keyword">if</span> (y + 1 &lt; m) dfs1(x, y + 1, sum ^ mp[x][y + 1], step + 1);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void dfs2(int x, int y, ll sum) &#123;</span><br><span class="line">    <span class="keyword">if</span> (s[x][y].size()) &#123;   </span><br><span class="line">        <span class="keyword">if</span> (s[x][y].count(sum ^ mp[x][y] ^ k))  //mp[x][y]的值会异或两次,所以再异或一次抵消</span><br><span class="line">            ans += s[x][y][sum ^ mp[x][y] ^ k];</span><br><span class="line">        <span class="built_in">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (x - 1 &gt;= 0) dfs2(x - 1, y, sum ^ mp[x - 1][y]);</span><br><span class="line">    <span class="keyword">if</span> (y - 1 &gt;= 0) dfs2(x, y - 1, sum ^ mp[x][y - 1]);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int <span class="function"><span class="title">main</span></span>() &#123;</span><br><span class="line">    scanf(<span class="string">"%d%d%lld"</span>, &amp;n, &amp;m, &amp;k);</span><br><span class="line">    <span class="keyword">for</span> (int i = 0; i &lt; n; ++i)</span><br><span class="line">        <span class="keyword">for</span> (int j = 0; j &lt; m; ++j)</span><br><span class="line">            scanf(<span class="string">"%lld"</span>, &amp;mp[i][j]);</span><br><span class="line">    st = n + m &gt;&gt; 1;    //加号优先级大于位运算符</span><br><span class="line"></span><br><span class="line">    dfs1(0, 0, mp[0][0], 1);</span><br><span class="line">    dfs2(n - 1, m - 1, mp[n - 1][m - 1]);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%lld"</span>, ans);</span><br><span class="line">    <span class="built_in">return</span> 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码:"></a>代码:</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;bits/stdc++.h&gt;</span><br><span class="line"></span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">#define ll long long</span><br><span class="line"></span><br><span class="line">ll mp[21][21];</span><br><span class="line">int n, m;</span><br><span class="line">ll k;</span><br><span class="line"></span><br><span class="line">map&lt;ll, int&gt; s[21][21];     //记录起点搜一半路程的异或值</span><br><span class="line"></span><br><span class="line">int st;</span><br><span class="line">ll ans;</span><br><span class="line"></span><br><span class="line">void dfs1(int x, int y, ll sum, int step) &#123;</span><br><span class="line">    if (step &gt;= st) &#123;       //一半路程返回</span><br><span class="line">        ++s[x][y][sum];</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line">    if (x + 1 &lt; n) dfs1(x + 1, y, sum ^ mp[x + 1][y], step + 1);</span><br><span class="line">    if (y + 1 &lt; m) dfs1(x, y + 1, sum ^ mp[x][y + 1], step + 1);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void dfs2(int x, int y, ll sum) &#123;</span><br><span class="line">    if (s[x][y].size()) &#123;   </span><br><span class="line">        if (s[x][y].count(sum ^ mp[x][y] ^ k))  //mp[x][y]的值会异或两次,所以再异或一次抵消</span><br><span class="line">            ans += s[x][y][sum ^ mp[x][y] ^ k];</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line">    if (x - 1 &gt;= 0) dfs2(x - 1, y, sum ^ mp[x - 1][y]);</span><br><span class="line">    if (y - 1 &gt;= 0) dfs2(x, y - 1, sum ^ mp[x][y - 1]);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main() &#123;</span><br><span class="line">    scanf(&quot;%d%d%lld&quot;, &amp;n, &amp;m, &amp;k);</span><br><span class="line">    for (int i = 0; i &lt; n; ++i)</span><br><span class="line">        for (int j = 0; j &lt; m; ++j)</span><br><span class="line">            scanf(&quot;%lld&quot;, &amp;mp[i][j]);</span><br><span class="line">    st = n + m &gt;&gt; 1;    //加号优先级大于位运算符</span><br><span class="line"></span><br><span class="line">    dfs1(0, 0, mp[0][0], 1);</span><br><span class="line">    dfs2(n - 1, m - 1, mp[n - 1][m - 1]);</span><br><span class="line"></span><br><span class="line">    printf(&quot;%lld&quot;, ans);</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
 
       
@@ -474,10 +474,6 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">算法题</a>
               </li>
              
@@ -490,7 +486,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">图论</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">线段树</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">树上倍增</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -523,10 +531,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">树状数组</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">线段树</a>
               </li>
              
               <li class="article-tag-list-item">

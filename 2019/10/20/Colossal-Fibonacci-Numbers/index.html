@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="柠檬树下蒟蒻果">
 <meta property="og:description" content="昨晚紫书看到,以为很水,要写的时候一堆麻烦QwQ题目链接(紫书P316)  题意:Fibonacci数列f(0) = 0f(1) = 1f(i) = f(i - 1) + f(i - 1), (i &amp;gt;= 2)给出a, b, n,求f($a^b$) mod n.">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-10-26T07:10:19.173Z">
+<meta property="og:updated_time" content="2019-10-30T14:14:52.112Z">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="柠檬树下蒟蒻果" type="application/atom+xml">
@@ -195,7 +195,7 @@
 <h2 id="解法"><a href="#解法" class="headerlink" title="解法:"></a>解法:</h2><p>设F(i) = f(i) % n<br>那么当F(i) = F(0), F(i + 1) = F(1)时, 0<del>i-1就是一个循环节<br>这个循环节多长呢?余数最多n个,所以最多$n^2$项(0</del>n-1中选两次)开始循环<br>n最大是1000,所以循环节最大就是1e6<br>算出循环节后,再算出$a^b$是第几项就行了 (就是F($a^b$)=F($a^b$ mod n))</p>
 <p>题目给出的a和b爆了long long……但是unsigned long long还是能存得下<br>unsigned long long的占位符是%llu,或者直接cin读入</p>
 <hr>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码:"></a>代码:</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#include &lt;bits/stdc++.h&gt;</span></span><br><span class="line"></span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">typedef unsigned long long ull;</span><br><span class="line"></span><br><span class="line">ull qpow(ull q, ull n, ull mod) &#123;</span><br><span class="line">    ull ans = 1 % mod;</span><br><span class="line">    <span class="keyword">while</span> (n) &#123;</span><br><span class="line">        <span class="keyword">if</span> (n &amp; 1) ans = ans * q % mod;</span><br><span class="line">        q = q % mod * q % mod;</span><br><span class="line">        n &gt;&gt;= 1;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">ull a, b;</span><br><span class="line">int n;</span><br><span class="line">int Fib[1000010];</span><br><span class="line"></span><br><span class="line">int <span class="function"><span class="title">main</span></span>() &#123;</span><br><span class="line">    int t;</span><br><span class="line">    scanf(<span class="string">"%d"</span>, &amp;t);</span><br><span class="line">    <span class="keyword">while</span> (t--) &#123;</span><br><span class="line">        scanf(<span class="string">"%llu%llu%d"</span>, &amp;a, &amp;b, &amp;n);</span><br><span class="line">        Fib[1] = 1 % n;                     //n有可能是1</span><br><span class="line">        int tot;</span><br><span class="line">        <span class="keyword">for</span> (int i = 2;; ++i) &#123;</span><br><span class="line">            Fib[i] = (Fib[i - 1] + Fib[i - 2]) % n;</span><br><span class="line">            <span class="keyword">if</span> (Fib[i] == Fib[1] &amp;&amp; Fib[i - 1] == Fib[0]) &#123;</span><br><span class="line">                tot = i - 1;        //0~i-2是一个循环节,长度是i-1</span><br><span class="line">                <span class="built_in">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, Fib[qpow(a % tot, b, tot)]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">return</span> 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码:"></a>代码:</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;bits/stdc++.h&gt;</span><br><span class="line"></span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">typedef unsigned long long ull;</span><br><span class="line"></span><br><span class="line">ull qpow(ull q, ull n, ull mod) &#123;</span><br><span class="line">    ull ans = 1 % mod;</span><br><span class="line">    while (n) &#123;</span><br><span class="line">        if (n &amp; 1) ans = ans * q % mod;</span><br><span class="line">        q = q % mod * q % mod;</span><br><span class="line">        n &gt;&gt;= 1;</span><br><span class="line">    &#125;</span><br><span class="line">    return ans;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">ull a, b;</span><br><span class="line">int n;</span><br><span class="line">int Fib[1000010];</span><br><span class="line"></span><br><span class="line">int main() &#123;</span><br><span class="line">    int t;</span><br><span class="line">    scanf(&quot;%d&quot;, &amp;t);</span><br><span class="line">    while (t--) &#123;</span><br><span class="line">        scanf(&quot;%llu%llu%d&quot;, &amp;a, &amp;b, &amp;n);</span><br><span class="line">        Fib[1] = 1 % n;                     //n有可能是1</span><br><span class="line">        int tot;</span><br><span class="line">        for (int i = 2;; ++i) &#123;</span><br><span class="line">            Fib[i] = (Fib[i - 1] + Fib[i - 2]) % n;</span><br><span class="line">            if (Fib[i] == Fib[1] &amp;&amp; Fib[i - 1] == Fib[0]) &#123;</span><br><span class="line">                tot = i - 1;        //0~i-2是一个循环节,长度是i-1</span><br><span class="line">                break;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        printf(&quot;%d\n&quot;, Fib[qpow(a % tot, b, tot)]);</span><br><span class="line">    &#125;</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
 
       
@@ -472,10 +472,6 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">算法题</a>
               </li>
              
@@ -488,7 +484,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">图论</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">线段树</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">树上倍增</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -521,10 +529,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">树状数组</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">线段树</a>
               </li>
              
               <li class="article-tag-list-item">
