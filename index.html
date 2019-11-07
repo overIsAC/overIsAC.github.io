@@ -156,6 +156,105 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-0-1-MST-cf1453d" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+          
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/11/07/0-1-MST-cf1453d/">0-1 MST(CodeForces-1243D)</a>
+    </h1>
+  
+
+          
+          <a href="/2019/11/07/0-1-MST-cf1453d/" class="archive-article-date">
+  	<time datetime="2019-11-07T05:03:52.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-07</time>
+</a>
+          
+            
+            
+          
+            
+            
+        </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<p>题目给的是$10^5$个点的完全图(太多边)<br>赛中完全没想法<br>结束后看第二名的代码看会了<br><a href="https://vjudge.net/problem/CodeForces-1243D" target="_blank" rel="noopener">题目链接</a></p>
+<hr>
+<h2 id="题意"><a href="#题意" class="headerlink" title="题意:"></a>题意:</h2><p>给出n,代表有一个n个节点的完全图($\frac {n(n-1)}{2}$条边)<br>给出m,然后给出m对点,表示给出每一对点之间的边的权重是1<br>剩余没给出的边的权重是0<br>求最小生成树</p>
+<hr>
+<h2 id="解法"><a href="#解法" class="headerlink" title="解法:"></a>解法:</h2><p>set把权重为1的边的两个点存进去(当邻接表)<br>一开始当做没有边,用set把所有的点存进去</p>
+<p>从1到n检查是否还在set里面<br>如果第i个点还在,说明不存权重为0的边将1到i-1的点和i相连<br>然后从i这个点开始搜索,所有与i相连 存在路径权重和是0的点 从set里删除<br>(代表用为0的边将它们连在一起)<br>(再用一条权重为1的边将刚得到的点集 和之前得到的点集连在一起)</p>
+<p>(因为是最小生成树,所以尽量用是0的边)</p>
+<hr>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码:"></a>代码:</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;algorithm&gt;</span><br><span class="line">#include &lt;set&gt;</span><br><span class="line">#include &lt;cstdio&gt;</span><br><span class="line"></span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">const int N = 10 + 1e5;</span><br><span class="line"></span><br><span class="line">int n, m;</span><br><span class="line"></span><br><span class="line">set&lt;int&gt; E;</span><br><span class="line">set&lt;int&gt; mp[N];</span><br><span class="line"></span><br><span class="line">void dfs(int x) &#123;</span><br><span class="line">    int y = 0;</span><br><span class="line">    for (;;) &#123;</span><br><span class="line">        auto it = E.upper_bound(y);</span><br><span class="line">        if (it == E.end())              //已经没是0的边了</span><br><span class="line">            break;</span><br><span class="line">        y = *it;</span><br><span class="line">        if (!mp[x].count(y)) &#123;</span><br><span class="line">            E.erase(y);</span><br><span class="line">            dfs(y);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main() &#123;</span><br><span class="line">    scanf(&quot;%d%d&quot;, &amp;n, &amp;m);</span><br><span class="line">    for (int i = 1; i &lt;= n; ++i)</span><br><span class="line">        E.insert(i);</span><br><span class="line">    int u, v;</span><br><span class="line">    while (m--) &#123;</span><br><span class="line">        scanf(&quot;%d%d&quot;, &amp;u, &amp;v);</span><br><span class="line">        mp[u].insert(v);</span><br><span class="line">        mp[v].insert(u);</span><br><span class="line">    &#125;</span><br><span class="line">    int ans = 0;</span><br><span class="line">    for (int i = 1; i &lt;= n; ++i) &#123;</span><br><span class="line">        if (E.find(i) != E.end()) &#123;</span><br><span class="line">            ++ans;</span><br><span class="line">            dfs(i);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    printf(&quot;%d\n&quot;, ans - 1);            //ans个点集,用ans-1条权重为1的边连在一起</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">算法题</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">题解</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">最小生成树</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">搜索</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/11/07/0-1-MST-cf1453d/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Klotski2" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -960,95 +1059,6 @@
 
 
   
-    <article id="post-Views-Matter" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-          
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/10/22/Views-Matter/">Views Matter(CodeForces-1061B)</a>
-    </h1>
-  
-
-          
-          <a href="/2019/10/22/Views-Matter/" class="archive-article-date">
-  	<time datetime="2019-10-22T14:19:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-22</time>
-</a>
-          
-            
-            
-          
-            
-            
-        </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <hr>
-<p>一道1500分的cf题想了好久……<br><a href="https://vjudge.net/problem/CodeForces-1061B" target="_blank" rel="noopener">题目链接</a></p>
-<hr>
-<h2 id="题意"><a href="#题意" class="headerlink" title="题意:"></a>题意:</h2><p>给出n、m,n行m列.接下来n个数,<br>第i个数代表第i列i个格子<br>每行每列最少一个,最多能拿走多少</p>
-<hr>
-        
-          <a class="article-more-a" href="/2019/10/22/Views-Matter/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">算法题</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">贪心</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/10/22/Views-Matter/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
@@ -1182,15 +1192,23 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">算法题</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">题解</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">最小生成树</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">搜索</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1203,14 +1221,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">树上倍增</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">图论</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">最小生成树</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1227,10 +1237,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">贪心</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">搜索</a>
               </li>
              
               <li class="article-tag-list-item">

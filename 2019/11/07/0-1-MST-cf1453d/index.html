@@ -6,13 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://overisac.github.io">
-  <title>Tag: 图论 | 柠檬树下蒟蒻果</title>
+  <title>0-1 MST(CodeForces-1243D) | 柠檬树下蒟蒻果</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="柠檬树下蒟蒻果">
-<meta property="og:url" content="https:&#x2F;&#x2F;overisac.github.io&#x2F;tags&#x2F;%E5%9B%BE%E8%AE%BA&#x2F;index.html">
+  <meta name="description" content="题目给的是$10^5$个点的完全图(太多边)赛中完全没想法结束后看第二名的代码看会了题目链接  题意:给出n,代表有一个n个节点的完全图($\frac {n(n-1)}{2}$条边)给出m,然后给出m对点,表示给出每一对点之间的边的权重是1剩余没给出的边的权重是0求最小生成树  解法:set把权重为1的边的两个点存进去(当邻接表)一开始当做没有边,用set把所有的点存进去 从1到n检查是否还在s">
+<meta name="keywords" content="算法题,题解,最小生成树,搜索">
+<meta property="og:type" content="article">
+<meta property="og:title" content="0-1 MST(CodeForces-1243D)">
+<meta property="og:url" content="https:&#x2F;&#x2F;overisac.github.io&#x2F;2019&#x2F;11&#x2F;07&#x2F;0-1-MST-cf1453d&#x2F;index.html">
 <meta property="og:site_name" content="柠檬树下蒟蒻果">
+<meta property="og:description" content="题目给的是$10^5$个点的完全图(太多边)赛中完全没想法结束后看第二名的代码看会了题目链接  题意:给出n,代表有一个n个节点的完全图($\frac {n(n-1)}{2}$条边)给出m,然后给出m对点,表示给出每一对点之间的边的权重是1剩余没给出的边的权重是0求最小生成树  解法:set把权重为1的边的两个点存进去(当邻接表)一开始当做没有边,用set把所有的点存进去 从1到n检查是否还在s">
 <meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-11-07T06:10:36.007Z">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="柠檬树下蒟蒻果" type="application/atom+xml">
@@ -154,36 +158,52 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-0-1-MST-cf1453d" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/10/19/Fibonacci-Tree/" class="archive-article-date">
-  	<time datetime="2019-10-19T05:53:30.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-19</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+          
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/10/19/Fibonacci-Tree/">Fibonacci Tree(HDU-4786)</a>
+    <h1 class="article-title" itemprop="name">
+      0-1 MST(CodeForces-1243D)
     </h1>
   
 
-        <div class="article-info info-on-right">
           
+          <a href="/2019/11/07/0-1-MST-cf1453d/" class="archive-article-date">
+  	<time datetime="2019-11-07T05:03:52.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-07</time>
+</a>
+          
+            
+            
+          
+            <span class="archive-article-date">
+                阅读量 <span id="busuanzi_value_page_pv"></span>
+            </span>
+          
+            
+            
+        </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<p>题目给的是$10^5$个点的完全图(太多边)<br>赛中完全没想法<br>结束后看第二名的代码看会了<br><a href="https://vjudge.net/problem/CodeForces-1243D" target="_blank" rel="noopener">题目链接</a></p>
+<hr>
+<h2 id="题意"><a href="#题意" class="headerlink" title="题意:"></a>题意:</h2><p>给出n,代表有一个n个节点的完全图($\frac {n(n-1)}{2}$条边)<br>给出m,然后给出m对点,表示给出每一对点之间的边的权重是1<br>剩余没给出的边的权重是0<br>求最小生成树</p>
+<hr>
+<h2 id="解法"><a href="#解法" class="headerlink" title="解法:"></a>解法:</h2><p>set把权重为1的边的两个点存进去(当邻接表)<br>一开始当做没有边,用set把所有的点存进去</p>
+<p>从1到n检查是否还在set里面<br>如果第i个点还在,说明不存权重为0的边将1到i-1的点和i相连<br>然后从i这个点开始搜索,所有与i相连 存在路径权重和是0的点 从set里删除<br>(代表用为0的边将它们连在一起)<br>(再用一条权重为1的边将刚得到的点集 和之前得到的点集连在一起)</p>
+<p>(因为是最小生成树,所以尽量用是0的边)</p>
+<hr>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码:"></a>代码:</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;algorithm&gt;</span><br><span class="line">#include &lt;set&gt;</span><br><span class="line">#include &lt;cstdio&gt;</span><br><span class="line"></span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">const int N = 10 + 1e5;</span><br><span class="line"></span><br><span class="line">int n, m;</span><br><span class="line"></span><br><span class="line">set&lt;int&gt; E;</span><br><span class="line">set&lt;int&gt; mp[N];</span><br><span class="line"></span><br><span class="line">void dfs(int x) &#123;</span><br><span class="line">    int y = 0;</span><br><span class="line">    for (;;) &#123;</span><br><span class="line">        auto it = E.upper_bound(y);</span><br><span class="line">        if (it == E.end())              //已经没是0的边了</span><br><span class="line">            break;</span><br><span class="line">        y = *it;</span><br><span class="line">        if (!mp[x].count(y)) &#123;</span><br><span class="line">            E.erase(y);</span><br><span class="line">            dfs(y);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main() &#123;</span><br><span class="line">    scanf(&quot;%d%d&quot;, &amp;n, &amp;m);</span><br><span class="line">    for (int i = 1; i &lt;= n; ++i)</span><br><span class="line">        E.insert(i);</span><br><span class="line">    int u, v;</span><br><span class="line">    while (m--) &#123;</span><br><span class="line">        scanf(&quot;%d%d&quot;, &amp;u, &amp;v);</span><br><span class="line">        mp[u].insert(v);</span><br><span class="line">        mp[v].insert(u);</span><br><span class="line">    &#125;</span><br><span class="line">    int ans = 0;</span><br><span class="line">    for (int i = 1; i &lt;= n; ++i) &#123;</span><br><span class="line">        if (E.find(i) != E.end()) &#123;</span><br><span class="line">            ++ans;</span><br><span class="line">            dfs(i);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    printf(&quot;%d\n&quot;, ans - 1);            //ans个点集,用ans-1条权重为1的边连在一起</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -197,29 +217,129 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">图论</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">最小生成树</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">最小生成树</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">搜索</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=https://overisac.github.io/2019/11/07/0-1-MST-cf1453d/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2019/11/05/Klotski2/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Klotski2</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#题意"><span class="toc-number">1.</span> <span class="toc-text">题意:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#解法"><span class="toc-number">2.</span> <span class="toc-text">解法:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#代码"><span class="toc-number">3.</span> <span class="toc-text">代码:</span></a></li></ol>
+                    </div>
+                </span>
+            </div>
+        </div>
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -255,9 +375,9 @@
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
@@ -348,15 +468,23 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">算法题</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">题解</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">最小生成树</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">搜索</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -369,14 +497,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">树上倍增</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">图论</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">最小生成树</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -393,10 +513,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">贪心</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">搜索</a>
               </li>
              
               <li class="article-tag-list-item">
