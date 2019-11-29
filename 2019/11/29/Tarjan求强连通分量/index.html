@@ -6,14 +6,22 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://overisac.github.io">
-  <title>Tag: 数学 | 柠檬树下蒟蒻果</title>
+  <title>Tarjan求强连通分量 | 柠檬树下蒟蒻果</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="柠檬树下蒟蒻果">
-<meta property="og:url" content="https:&#x2F;&#x2F;overisac.github.io&#x2F;tags&#x2F;%E6%95%B0%E5%AD%A6&#x2F;index.html">
+  <meta name="description" content="求强连通分量(SCC)的算法有Tarjan、Kasaraju刚学Tarjan求scc,马上写blog记下来(ˇˍˇ)  前置芝士: 知道有向图 会遍历有向图(dfs) 链式前向星 树(dfs搜索树) 栈(文中是数组模拟)、vector(STL)  或者都不会,进来康康?(。・・)ノ">
+<meta name="keywords" content="算法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Tarjan求强连通分量">
+<meta property="og:url" content="https:&#x2F;&#x2F;overisac.github.io&#x2F;2019&#x2F;11&#x2F;29&#x2F;Tarjan%E6%B1%82%E5%BC%BA%E8%BF%9E%E9%80%9A%E5%88%86%E9%87%8F&#x2F;index.html">
 <meta property="og:site_name" content="柠檬树下蒟蒻果">
+<meta property="og:description" content="求强连通分量(SCC)的算法有Tarjan、Kasaraju刚学Tarjan求scc,马上写blog记下来(ˇˍˇ)  前置芝士: 知道有向图 会遍历有向图(dfs) 链式前向星 树(dfs搜索树) 栈(文中是数组模拟)、vector(STL)  或者都不会,进来康康?(。・・)ノ">
 <meta property="og:locale" content="en">
+<meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;overIsAC&#x2F;blog_picture&#x2F;raw&#x2F;master&#x2F;tarjan%E6%B1%82scc&#x2F;scc%E8%A7%A3%E9%87%8A.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;overIsAC&#x2F;blog_picture&#x2F;raw&#x2F;master&#x2F;tarjan%E6%B1%82scc&#x2F;.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;overIsAC&#x2F;blog_picture&#x2F;raw&#x2F;master&#x2F;tarjan%E6%B1%82scc&#x2F;ac.png">
+<meta property="og:updated_time" content="2019-11-29T14:17:41.598Z">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;github.com&#x2F;overIsAC&#x2F;blog_picture&#x2F;raw&#x2F;master&#x2F;tarjan%E6%B1%82scc&#x2F;scc%E8%A7%A3%E9%87%8A.png">
   
     <link rel="alternative" href="/atom.xml" title="柠檬树下蒟蒻果" type="application/atom+xml">
   
@@ -160,68 +168,210 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-Tarjan求强连通分量" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/10/20/Colossal-Fibonacci-Numbers/" class="archive-article-date">
-  	<time datetime="2019-10-20T01:19:56.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-20</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+          
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/10/20/Colossal-Fibonacci-Numbers/">Colossal Fibonacci Numbers!(UVA-11582)</a>
+    <h1 class="article-title" itemprop="name">
+      Tarjan求强连通分量
     </h1>
   
 
-        <div class="article-info info-on-right">
           
+          <a href="/2019/11/29/Tarjan%E6%B1%82%E5%BC%BA%E8%BF%9E%E9%80%9A%E5%88%86%E9%87%8F/" class="archive-article-date">
+  	<time datetime="2019-11-29T11:02:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-29</time>
+</a>
+          
+            
+            
+          
+            <span class="archive-article-date">
+                阅读量 <span id="busuanzi_value_page_pv"></span>
+            </span>
+          
+            
+            
+        </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<p>求强连通分量(SCC)的算法有Tarjan、Kasaraju<br>刚学Tarjan求scc<del>,马上写blog记下来(ˇˍˇ)</del></p>
+<hr>
+<h2 id="前置芝士"><a href="#前置芝士" class="headerlink" title="前置芝士:"></a>前置芝士:</h2><ul>
+<li>知道有向图</li>
+<li>会遍历有向图(dfs)</li>
+<li>链式前向星</li>
+<li>树(dfs搜索树)</li>
+<li>栈(文中是数组模拟)、vector(STL)</li>
+</ul>
+<p><del>或者都不会,进来康康?(。・・)ノ</del></p>
+<a id="more"></a>
+<hr>
+<h2 id="概念"><a href="#概念" class="headerlink" title="概念:"></a>概念:</h2><p>强连通图: 任意两点都能互相到达的有向图<br>        (图中任意的x,y,能x走到y,y走到x)</p>
+<p>强连通分量: 有向图的极大强连通子图<br>从<a href="https://www.cnblogs.com/five20/p/7594239.html" target="_blank" rel="noopener">大佬博客</a>偷张图解释强连通分量<br><img src="https://github.com/overIsAC/blog_picture/raw/master/tarjan%E6%B1%82scc/scc%E8%A7%A3%E9%87%8A.png" alt="1"><br>上图的强连通分量有{ 1, 2, 3, 4 }, {5}, {6}<br>而{ 1, 3, 4 } 不是,因为加上2这个点还是强连通子图,不满足”<strong>极大</strong>“</p>
+<p>所以强连通分量是有向图的某个子图(也是一个强连通图),而这个子图不被这个有向图的<strong>其他子图包含</strong>(极大)<br>极大不一定是最大,所以一张有向图的强连通分量可能不止一个</p>
+<hr>
+<h2 id="做法"><a href="#做法" class="headerlink" title="做法:"></a>做法:</h2><p>Tarjan算法是基于深度优先搜索线性时间内对有向图求scc的算法<br><del>(这线性是多少我也不会qwq,反正应该还行吧)</del></p>
+<p>先引进两个概念</p>
+<ul>
+<li>dfn[i] 时间戳: 使用dfs对有向图遍历,而dfn[i]代表dfs中第i个节点是第几个访问到</li>
+<li>low[i] 追溯值: dfs对图遍历会产生一颗树(或者深林),low[i]是下面两种节点的时间戳的最小值<br>2-1 dfs搜索树中以i节点为根的子树中的所有节点<br>2-2 通过不在dfs搜索树的边达到节点i的节点</li>
+</ul>
+<h3 id="具体做法"><a href="#具体做法" class="headerlink" title="具体做法:"></a>具体做法:</h3><ol>
+<li>遍历到节点x,初始化dfn[x],令low[x]=dfn[x],x入栈</li>
+<li>通过链式前向星循环查看与x相连的边,把y定义为这条边的另一个点</li>
+<li>如果节点y没来过,递归节点y,回溯回来再比较low[x]和low[y],就是上面的2-1</li>
+<li>如果节点y来过且这个点还在栈里面,比较low[x]和dfn[y],上面的2-2</li>
+<li>查看相邻的边结束后,查看low[x]是否等于dfn[x]</li>
+<li>如果等于,弹栈,直到把节点x弹出,弹出的节点和它们之间的边就是一个强连通分量</li>
+<li>回溯</li>
+</ol>
+<h3 id="大概解释"><a href="#大概解释" class="headerlink" title="大概解释:"></a>大概解释:</h3><p>dfn[i]要么等于low[i],要么大于low[i]<br>dfn[i]&gt;low[i]时,说明节点i有与之前访问的节点相连,这就形成一个环,也就有强连通分量<br>dfn[i]=low[i]时,这节点i也就是上一句说的之前访问节点</p>
+<p>而节点y来过,还要在栈中,<br>因为如果不在栈中,y没有连着之前的节点与x形成环<br>(感觉真口糊了QwQ)</p>
+<p><img src="https://github.com/overIsAC/blog_picture/raw/master/tarjan%E6%B1%82scc/.png" alt="蓝书上的图"><br>上图是一个有向图,圆圈里是编号也是dfn[i]<del>(经过我折腾出来)</del>,[i]是追溯值<br>容易发现同一个强连通分量的节点的追溯值相同</p>
+<p>下面代码是我蓝书抄的(改了部分)<br>还有上图对应的输入数据</p>
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码:"></a>代码:</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">10</span> + <span class="number">1e5</span>, M = <span class="number">10</span> + <span class="number">1e6</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> ver[M], Next[M], head[N];<span class="comment">//链式前向星</span></span><br><span class="line"><span class="keyword">int</span> dfn[N], low[N];          <span class="comment">//时间戳,追溯值</span></span><br><span class="line"><span class="keyword">int</span> <span class="built_in">stack</span>[N], ins[N], c[N];  <span class="comment">//模拟栈的数组,标记是否在栈内,记录在哪个强连通分量</span></span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; scc[N];          <span class="comment">//存每个连通分量</span></span><br><span class="line"><span class="keyword">int</span> n, m, tot, num, top, cnt;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y)</span> </span>&#123;</span><br><span class="line">    ver[++tot] = y;</span><br><span class="line">    Next[tot] = head[x];</span><br><span class="line">    head[x] = tot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">tarjan</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">    dfn[x] = low[x] = ++num;</span><br><span class="line">    <span class="built_in">stack</span>[++top] = x;</span><br><span class="line">    ins[x] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = head[x]; i; i = Next[i]) &#123;</span><br><span class="line">        <span class="keyword">int</span>&amp; y = ver[i];</span><br><span class="line">        <span class="keyword">if</span> (!dfn[y]) &#123;      <span class="comment">//为0说明,还没访问过</span></span><br><span class="line">            tarjan(y);</span><br><span class="line">            low[x] = min(low[x], low[y]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (ins[y])</span><br><span class="line">            low[x] = min(low[x], dfn[y]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (dfn[x] == low[x]) &#123; <span class="comment">//有环(有强连通分量)</span></span><br><span class="line">        <span class="keyword">int</span> y;</span><br><span class="line">        ++cnt;              <span class="comment">//第cnt个强连通分量,然后把相应的节点存到scc[cnt]</span></span><br><span class="line">        <span class="keyword">do</span> &#123;</span><br><span class="line">            y = <span class="built_in">stack</span>[top--];</span><br><span class="line">            ins[y] = <span class="number">0</span>;</span><br><span class="line">            c[y] = cnt;</span><br><span class="line">            scc[cnt].push_back(y);</span><br><span class="line">        &#125; <span class="keyword">while</span> (x != y);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; n &gt;&gt; m;          <span class="comment">//读入n个点,m条边</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= m; ++i) &#123;</span><br><span class="line">        <span class="keyword">int</span> x, y;</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; x &gt;&gt; y;</span><br><span class="line">        add(x, y);          <span class="comment">//x指向y</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++i)</span><br><span class="line">        <span class="keyword">if</span> (!dfn[i])        <span class="comment">//有可能不是连通图</span></span><br><span class="line">            tarjan(i);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= cnt; ++i) &#123;    <span class="comment">//输出所有强连通分量</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"Scc.%d (Size %d):"</span>, i, scc[i].size());</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span> it : scc[i])</span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; <span class="string">' '</span> &lt;&lt; it;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="数据"><a href="#数据" class="headerlink" title="数据:"></a>数据:</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">8 13</span><br><span class="line">6 8</span><br><span class="line">6 7</span><br><span class="line">8 7</span><br><span class="line">8 9</span><br><span class="line">9 6</span><br><span class="line">1 5 </span><br><span class="line">1 6</span><br><span class="line">1 2</span><br><span class="line">2 3</span><br><span class="line">3 4</span><br><span class="line">4 5</span><br><span class="line">5 2</span><br><span class="line">7 4</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="来道题"><a href="#来道题" class="headerlink" title="来道题?"></a>来道题?</h2><p><a href="https://www.luogu.com.cn/problem/P1726" target="_blank" rel="noopener">洛谷 P1726上白泽慧音</a></p>
+<h3 id="AC代码"><a href="#AC代码" class="headerlink" title="AC代码:"></a>AC代码:</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">10</span> + <span class="number">5e3</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> M = <span class="number">10</span> + <span class="number">1e5</span>;     <span class="comment">//有双向边，所以开两倍</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">edge</span> &#123;</span></span><br><span class="line">    <span class="keyword">int</span> ver, next;</span><br><span class="line">&#125; E[M];</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> head[N], tot;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> u, <span class="keyword">int</span> v)</span> </span>&#123;</span><br><span class="line">    ++tot;</span><br><span class="line">    E[tot].ver = v;</span><br><span class="line">    E[tot].next = head[u];</span><br><span class="line">    head[u] = tot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; scc[N];</span><br><span class="line"><span class="keyword">int</span> cnt;</span><br><span class="line"><span class="keyword">int</span> <span class="built_in">stack</span>[N], top;</span><br><span class="line"><span class="keyword">int</span> ins[N];</span><br><span class="line"><span class="keyword">int</span> dfn[N], low[N], num;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">tarjan</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">    dfn[x] = low[x] = ++num;</span><br><span class="line">    <span class="built_in">stack</span>[++top] = x;</span><br><span class="line">    ins[x] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">int</span> y;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = head[x]; i; i = E[i].next) &#123;</span><br><span class="line">        y = E[i].ver;</span><br><span class="line">        <span class="keyword">if</span> (!dfn[y]) &#123;</span><br><span class="line">            tarjan(y);</span><br><span class="line">            low[x] = min(low[x], low[y]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (ins[y])</span><br><span class="line">            low[x] = min(low[x], dfn[y]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (low[x] == dfn[x]) &#123;</span><br><span class="line">        ++cnt;</span><br><span class="line">        <span class="keyword">do</span> &#123;</span><br><span class="line">            y = <span class="built_in">stack</span>[top--];</span><br><span class="line">            ins[y] = <span class="number">0</span>;</span><br><span class="line">            scc[cnt].push_back(y);</span><br><span class="line">        &#125; <span class="keyword">while</span> (x != y);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n, m;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">cmp</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; a, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; b)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (a.size() != b.size()) <span class="keyword">return</span> a.size() &gt; b.size();</span><br><span class="line">    sort(a.begin(), a.end());</span><br><span class="line">    sort(b.begin(), b.end());</span><br><span class="line">    <span class="keyword">return</span> a &lt; b;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> u, v, w;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;n, &amp;m);</span><br><span class="line">    <span class="keyword">while</span> (m--) &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d%d%d"</span>, &amp;u, &amp;v, &amp;w);</span><br><span class="line">        <span class="keyword">if</span> (w == <span class="number">1</span>)</span><br><span class="line">            add(u, v);</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            add(u, v);</span><br><span class="line">            add(v, u);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++i)</span><br><span class="line">        <span class="keyword">if</span> (!dfn[i])</span><br><span class="line">            tarjan(i);</span><br><span class="line">    sort(scc + <span class="number">1</span>, scc + n + <span class="number">1</span>, cmp);        <span class="comment">//这样sort好像并没增加多少运行时间</span></span><br><span class="line">    sort(scc[<span class="number">1</span>].begin(), scc[<span class="number">1</span>].end());</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, scc[<span class="number">1</span>].size());</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">auto</span> i : scc[<span class="number">1</span>])</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d "</span>, i);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id=""><a href="#" class="headerlink" title=""></a><img src="https://github.com/overIsAC/blog_picture/raw/master/tarjan%E6%B1%82scc/ac.png" alt="AC了"></h2><p>写完撒花(ﾉ*･ω･)ﾉ</p>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料:"></a>参考资料:</h2><p>算法竞赛进阶指南<br>大佬的图<a href="https://www.cnblogs.com/five20/p/7594239.html" target="_blank" rel="noopener">https://www.cnblogs.com/five20/p/7594239.html</a><br>洛谷的题<a href="https://www.luogu.com.cn/problem/P1726" target="_blank" rel="noopener">https://www.luogu.com.cn/problem/P1726</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">算法题</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">题解</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">数学</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=https://overisac.github.io/2019/11/29/Tarjan%E6%B1%82%E5%BC%BA%E8%BF%9E%E9%80%9A%E5%88%86%E9%87%8F/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2019/11/29/2019-11-29/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">2019-11-29</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前置芝士"><span class="toc-number">1.</span> <span class="toc-text">前置芝士:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#概念"><span class="toc-number">2.</span> <span class="toc-text">概念:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#做法"><span class="toc-number">3.</span> <span class="toc-text">做法:</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#具体做法"><span class="toc-number">3.1.</span> <span class="toc-text">具体做法:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#大概解释"><span class="toc-number">3.2.</span> <span class="toc-text">大概解释:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#代码"><span class="toc-number">3.3.</span> <span class="toc-text">代码:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#数据"><span class="toc-number">3.4.</span> <span class="toc-text">数据:</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#来道题"><span class="toc-number">4.</span> <span class="toc-text">来道题?</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#AC代码"><span class="toc-number">4.1.</span> <span class="toc-text">AC代码:</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#null"><span class="toc-number">5.</span> <span class="toc-text"></span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考资料"><span class="toc-number">6.</span> <span class="toc-text">参考资料:</span></a></li></ol>
+                    </div>
+                </span>
+            </div>
+        </div>
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -257,9 +407,9 @@
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
