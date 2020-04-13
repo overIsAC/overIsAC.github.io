@@ -8,18 +8,18 @@
   <link rel="dns-prefetch" href="https://overisac.github.io">
   <title>Tarjan求强连通分量 | 柠檬树下蒟蒻果</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="求强连通分量(SCC)的算法有Tarjan、Kasaraju刚学Tarjan求scc,马上写blog记下来(ˇˍˇ)  前置芝士: 知道有向图 会遍历有向图(dfs) 链式前向星 树(dfs搜索树) 栈(文中是数组模拟)、vector(STL)  或者都不会,进来康康?(。・・)ノ">
+  <meta name="description" content="求强连通分量(SCC)的算法有Tarjan、Kasaraju刚学Tarjan求scc,马上写blog记下来(ˇˍˇ)  前置芝士: 知道有向图 会遍历有向图(dfs) 链式前向星 树(dfs搜索树) 栈(文中是数组模拟)、vector(用来储存每个scc里面的节点)  或者都不会,进来康康?(。・・)ノ">
 <meta name="keywords" content="算法,Tarjan,强连通分量">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Tarjan求强连通分量">
 <meta property="og:url" content="https:&#x2F;&#x2F;overisac.github.io&#x2F;2019&#x2F;11&#x2F;29&#x2F;Tarjan%E6%B1%82%E5%BC%BA%E8%BF%9E%E9%80%9A%E5%88%86%E9%87%8F&#x2F;index.html">
 <meta property="og:site_name" content="柠檬树下蒟蒻果">
-<meta property="og:description" content="求强连通分量(SCC)的算法有Tarjan、Kasaraju刚学Tarjan求scc,马上写blog记下来(ˇˍˇ)  前置芝士: 知道有向图 会遍历有向图(dfs) 链式前向星 树(dfs搜索树) 栈(文中是数组模拟)、vector(STL)  或者都不会,进来康康?(。・・)ノ">
+<meta property="og:description" content="求强连通分量(SCC)的算法有Tarjan、Kasaraju刚学Tarjan求scc,马上写blog记下来(ˇˍˇ)  前置芝士: 知道有向图 会遍历有向图(dfs) 链式前向星 树(dfs搜索树) 栈(文中是数组模拟)、vector(用来储存每个scc里面的节点)  或者都不会,进来康康?(。・・)ノ">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;overIsAC&#x2F;blog_picture&#x2F;raw&#x2F;master&#x2F;tarjan%E6%B1%82scc&#x2F;scc%E8%A7%A3%E9%87%8A.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;overIsAC&#x2F;blog_picture&#x2F;raw&#x2F;master&#x2F;tarjan%E6%B1%82scc&#x2F;.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;overIsAC&#x2F;blog_picture&#x2F;raw&#x2F;master&#x2F;tarjan%E6%B1%82scc&#x2F;ac.png">
-<meta property="og:updated_time" content="2019-11-29T15:30:40.017Z">
+<meta property="og:updated_time" content="2020-04-13T12:11:27.661Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;github.com&#x2F;overIsAC&#x2F;blog_picture&#x2F;raw&#x2F;master&#x2F;tarjan%E6%B1%82scc&#x2F;scc%E8%A7%A3%E9%87%8A.png">
   
@@ -205,7 +205,7 @@
 <li>会遍历有向图(dfs)</li>
 <li>链式前向星</li>
 <li>树(dfs搜索树)</li>
-<li>栈(文中是数组模拟)、vector(STL)</li>
+<li>栈(文中是数组模拟)、vector(用来储存每个scc里面的节点)</li>
 </ul>
 <p><del>或者都不会,进来康康?(。・・)ノ</del></p>
 <a id="more"></a>
@@ -231,7 +231,7 @@
 </ol>
 <h3 id="大概解释"><a href="#大概解释" class="headerlink" title="大概解释:"></a>大概解释:</h3><p>dfn[i]要么等于low[i],要么大于low[i]<br>dfn[i]&gt;low[i]时,说明节点i有与之前访问的节点相连,这就形成一个环,也就有强连通分量<br>dfn[i]=low[i]时,这节点i也就是上一句说的之前访问节点</p>
 <p>而节点y来过,还要在栈中,<br>因为如果不在栈中,y没有连着之前的节点与x形成环<br>(感觉真口糊了QwQ)</p>
-<p><img src="https://github.com/overIsAC/blog_picture/raw/master/tarjan%E6%B1%82scc/.png" alt="蓝书上的图"><br>上图是一个有向图,圆圈里是编号也是dfn[i]<del>(经过我折腾出来)</del>,[i]是追溯值<br>容易发现同一个强连通分量的节点的追溯值相同</p>
+<p><img src="https://github.com/overIsAC/blog_picture/raw/master/tarjan%E6%B1%82scc/.png" alt="蓝书上的图"><br>上图是一个有向图,圆圈里是编号也是dfn[i]<del>(被我折腾出来了)</del>,[i]是追溯值<br>容易发现同一个强连通分量的节点的追溯值相同</p>
 <p>下面代码是我蓝书抄的(改了部分)<br>还有上图对应的输入数据</p>
 <h3 id="代码"><a href="#代码" class="headerlink" title="代码:"></a>代码:</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">10</span> + <span class="number">1e5</span>, M = <span class="number">10</span> + <span class="number">1e6</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> ver[M], Next[M], head[N];<span class="comment">//链式前向星</span></span><br><span class="line"><span class="keyword">int</span> dfn[N], low[N];          <span class="comment">//时间戳,追溯值</span></span><br><span class="line"><span class="keyword">int</span> <span class="built_in">stack</span>[N], ins[N], c[N];  <span class="comment">//模拟栈的数组,标记是否在栈内,记录在哪个强连通分量</span></span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; scc[N];          <span class="comment">//存每个连通分量</span></span><br><span class="line"><span class="keyword">int</span> n, m, tot, num, top, cnt;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y)</span> </span>&#123;</span><br><span class="line">    ver[++tot] = y;</span><br><span class="line">    Next[tot] = head[x];</span><br><span class="line">    head[x] = tot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">tarjan</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">    dfn[x] = low[x] = ++num;</span><br><span class="line">    <span class="built_in">stack</span>[++top] = x;</span><br><span class="line">    ins[x] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = head[x]; i; i = Next[i]) &#123;</span><br><span class="line">        <span class="keyword">int</span>&amp; y = ver[i];</span><br><span class="line">        <span class="keyword">if</span> (!dfn[y]) &#123;      <span class="comment">//为0说明,还没访问过</span></span><br><span class="line">            tarjan(y);</span><br><span class="line">            low[x] = min(low[x], low[y]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (ins[y])</span><br><span class="line">            low[x] = min(low[x], dfn[y]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (dfn[x] == low[x]) &#123; <span class="comment">//有环(有强连通分量)</span></span><br><span class="line">        <span class="keyword">int</span> y;</span><br><span class="line">        ++cnt;              <span class="comment">//第cnt个强连通分量,然后把相应的节点存到scc[cnt]</span></span><br><span class="line">        <span class="keyword">do</span> &#123;</span><br><span class="line">            y = <span class="built_in">stack</span>[top--];</span><br><span class="line">            ins[y] = <span class="number">0</span>;</span><br><span class="line">            c[y] = cnt;</span><br><span class="line">            scc[cnt].push_back(y);</span><br><span class="line">        &#125; <span class="keyword">while</span> (x != y);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; n &gt;&gt; m;          <span class="comment">//读入n个点,m条边</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= m; ++i) &#123;</span><br><span class="line">        <span class="keyword">int</span> x, y;</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; x &gt;&gt; y;</span><br><span class="line">        add(x, y);          <span class="comment">//x指向y</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++i)</span><br><span class="line">        <span class="keyword">if</span> (!dfn[i])        <span class="comment">//有可能不是连通图</span></span><br><span class="line">            tarjan(i);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= cnt; ++i) &#123;    <span class="comment">//输出所有强连通分量</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"Scc.%d (Size %d):"</span>, i, scc[i].size());</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span> it : scc[i])</span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; <span class="string">' '</span> &lt;&lt; it;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h3 id="数据"><a href="#数据" class="headerlink" title="数据:"></a>数据:</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">8 13</span><br><span class="line">6 8</span><br><span class="line">6 7</span><br><span class="line">8 7</span><br><span class="line">8 9</span><br><span class="line">9 6</span><br><span class="line">1 5 </span><br><span class="line">1 6</span><br><span class="line">1 2</span><br><span class="line">2 3</span><br><span class="line">3 4</span><br><span class="line">4 5</span><br><span class="line">5 2</span><br><span class="line">7 4</span><br></pre></td></tr></table></figure>
@@ -333,6 +333,15 @@
   
 <nav id="article-nav">
   
+    <a href="/2020/04/13/Longest-Subarray-hdu6602/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          Longest Subarray(HDU-6602)
+        
+      </div>
+    </a>
+  
   
     <a href="/2019/11/29/2019-11-29/" id="article-nav-older" class="article-nav-link-wrap">
       <div class="article-nav-title">2019-11-29</div>
@@ -391,7 +400,7 @@
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2019 蒜拧孟
+    		&copy; 2020 蒜拧孟
     	</div>
       	<div class="footer-right">
     
@@ -530,19 +539,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">线段树</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">树上倍增</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">动态规划</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">数学</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">线段树</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">树上倍增</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -555,6 +564,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">并查集</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">贪心</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -575,10 +588,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">0/1分数规划</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">贪心</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -642,10 +651,6 @@ MathJax.Hub.Queue(function() {
             </li>
           
             <li class="search-li">
-              <a href="https://jay6.cn/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>杰哥</a>
-            </li>
-          
-            <li class="search-li">
               <a href="https://zhakul.top/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>z师傅</a>
             </li>
           
@@ -657,6 +662,10 @@ MathJax.Hub.Queue(function() {
               <a href="http://hmk.sakuramk.cn/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>洪dalao</a>
             </li>
           
+            <li class="search-li">
+              <a href="https://www.cnblogs.com/AlexLINS/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>AlexLINS</a>
+            </li>
+          
         </ul>
   		
     	</section>
@@ -665,7 +674,7 @@ MathJax.Hub.Queue(function() {
     
     	<section class="tools-section tools-section-me" q-show="aboutme">
   	  	
-  	  		<div class="aboutme-wrap" id="js-aboutme">目前就读于中山学院&lt;br&gt;每天被虐得死去活来&lt;br&gt;&lt;br&gt;开blog调节下生活&lt;br&gt;&lt;br&gt;(如果侵权,请联系删除/修改)</div>
+  	  		<div class="aboutme-wrap" id="js-aboutme">目前就读于中山学院&lt;br&gt;每天被虐得死去活来&lt;br&gt;&lt;br&gt;开blog调节下生活&lt;br&gt;&lt;br&gt;(如有侵权,请联系删除/修改)</div>
   	  	
     	</section>
     
