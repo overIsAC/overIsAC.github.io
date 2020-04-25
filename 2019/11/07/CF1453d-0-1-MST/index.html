@@ -12,11 +12,11 @@
 <meta name="keywords" content="算法题,题解,最小生成树,搜索">
 <meta property="og:type" content="article">
 <meta property="og:title" content="0-1 MST(CodeForces-1243D)">
-<meta property="og:url" content="https:&#x2F;&#x2F;overisac.github.io&#x2F;2019&#x2F;11&#x2F;07&#x2F;0-1-MST-cf1453d&#x2F;index.html">
+<meta property="og:url" content="https:&#x2F;&#x2F;overisac.github.io&#x2F;2019&#x2F;11&#x2F;07&#x2F;CF1453d-0-1-MST&#x2F;index.html">
 <meta property="og:site_name" content="柠檬树下蒟蒻果">
 <meta property="og:description" content="题目给的是$10^5$个点的完全图(太多边)赛中完全没想法结束后看第二名的代码看会了题目链接">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-11-29T07:04:56.075Z">
+<meta property="og:updated_time" content="2020-04-25T16:45:34.180Z">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="柠檬树下蒟蒻果" type="application/atom+xml">
@@ -93,6 +93,8 @@
 		        
 					<a class="qq" target="_blank" href="/img/QQ.jpg" title="qq"><i class="icon-qq"></i></a>
 		        
+					<a class="bilibili" target="_blank" href="https://space.bilibili.com/86236000" title="bilibili"><i class="icon-bilibili"></i></a>
+		        
 			</div>
 		</nav>
 	</header>		
@@ -136,6 +138,8 @@
 			        
 						<a class="qq" target="_blank" href="/img/QQ.jpg" title="qq"><i class="icon-qq"></i></a>
 			        
+						<a class="bilibili" target="_blank" href="https://space.bilibili.com/86236000" title="bilibili"><i class="icon-bilibili"></i></a>
+			        
 				</div>
 			</nav>
 
@@ -164,7 +168,7 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-0-1-MST-cf1453d" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-CF1453d-0-1-MST" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
@@ -176,7 +180,7 @@
   
 
           
-          <a href="/2019/11/07/0-1-MST-cf1453d/" class="archive-article-date">
+          <a href="/2019/11/07/CF1453d-0-1-MST/" class="archive-article-date">
   	<time datetime="2019-11-07T05:03:52.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-07</time>
 </a>
           
@@ -284,7 +288,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=https://overisac.github.io/2019/11/07/0-1-MST-cf1453d/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=https://overisac.github.io/2019/11/07/CF1453d-0-1-MST/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -504,10 +508,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">动态规划</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">数学</a>
               </li>
              
@@ -528,11 +528,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">并查集</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">贪心</a>
+                <a href="javascript:void(0)" class="js-tag color5">动态规划</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -545,6 +541,14 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">强连通分量</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">并查集</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">贪心</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -561,6 +565,14 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">概率/期望</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">后缀数组</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">后缀自动机</a>
               </li>
             
             <div class="clearfix"></div>
@@ -624,7 +636,7 @@ MathJax.Hub.Queue(function() {
             </li>
           
             <li class="search-li">
-              <a href="http://hmk.sakuramk.cn/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>洪dalao</a>
+              <a href="https://blog.sakuramk.cn/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>洪dalao</a>
             </li>
           
             <li class="search-li">

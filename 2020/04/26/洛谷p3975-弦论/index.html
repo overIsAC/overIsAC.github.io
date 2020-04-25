@@ -6,17 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://overisac.github.io">
-  <title>K Balanced Teams(CodeForces-1133E) | 柠檬树下蒟蒻果</title>
+  <title>弦论(luogu-p3975) | 柠檬树下蒟蒻果</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="感觉像背包然而我不会压掉一维题目链接">
-<meta name="keywords" content="算法题,题解,动态规划">
+  <meta name="description" content="因为不会SAM看了一下午后缀数组题解题目链接">
+<meta name="keywords" content="算法题,后缀数组,后缀自动机">
 <meta property="og:type" content="article">
-<meta property="og:title" content="K Balanced Teams(CodeForces-1133E)">
-<meta property="og:url" content="https:&#x2F;&#x2F;overisac.github.io&#x2F;2019&#x2F;11&#x2F;01&#x2F;K-Balanced-Teams-cf-1133E&#x2F;index.html">
+<meta property="og:title" content="弦论(luogu-p3975)">
+<meta property="og:url" content="https:&#x2F;&#x2F;overisac.github.io&#x2F;2020&#x2F;04&#x2F;26&#x2F;%E6%B4%9B%E8%B0%B7p3975-%E5%BC%A6%E8%AE%BA&#x2F;index.html">
 <meta property="og:site_name" content="柠檬树下蒟蒻果">
-<meta property="og:description" content="感觉像背包然而我不会压掉一维题目链接">
+<meta property="og:description" content="因为不会SAM看了一下午后缀数组题解题目链接">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-11-29T07:06:27.671Z">
+<meta property="og:updated_time" content="2020-04-25T17:23:20.727Z">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="柠檬树下蒟蒻果" type="application/atom+xml">
@@ -168,20 +168,20 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-K-Balanced-Teams-cf-1133E" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-洛谷p3975-弦论" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
           
   
     <h1 class="article-title" itemprop="name">
-      K Balanced Teams(CodeForces-1133E)
+      弦论(luogu-p3975)
     </h1>
   
 
           
-          <a href="/2019/11/01/K-Balanced-Teams-cf-1133E/" class="archive-article-date">
-  	<time datetime="2019-11-01T12:11:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-01</time>
+          <a href="/2020/04/26/%E6%B4%9B%E8%B0%B7p3975-%E5%BC%A6%E8%AE%BA/" class="archive-article-date">
+  	<time datetime="2020-04-25T16:41:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-26</time>
 </a>
           
             
@@ -198,20 +198,15 @@
     <div class="article-entry" itemprop="articleBody">
       
         <hr>
-<p>感觉像背包<br><del>然而我不会压掉一维</del><br><a href="https://vjudge.net/problem/CodeForces-1133E" target="_blank" rel="noopener">题目链接</a></p>
+<p><del>因为不会SAM</del><br>看了一下午后缀数组题解<br><a href="https://www.luogu.com.cn/problem/P3975" target="_blank" rel="noopener">题目链接</a></p>
 <a id="more"></a>
 <hr>
-<h2 id="题意"><a href="#题意" class="headerlink" title="题意:"></a>题意:</h2><p>给出n,k.给出n个人的能力值,要组刚好k支队伍<br>每支队伍最大和最小能力值之差不超过5<br>(可能有人没队伍)<br>问最多能组了多少人</p>
+<h2 id="题意"><a href="#题意" class="headerlink" title="题意:"></a>题意:</h2><p>问:字典序第k小的子串是哪个?<br>t为0则表示不同位置的相同子串算作一个，<br>t为1则表示不同位置的相同子串算作多个。</p>
 <hr>
-<h2 id="解法"><a href="#解法" class="headerlink" title="解法:"></a>解法:</h2><p>先对能力值升序sort</p>
-<p>cnt[i]:     从i位起往后有多少人与第i位的能力值不超过5<br>dp[i][j]:   表示前i个人组j支队伍最多多少人</p>
-<p>dp[i][j]能转移到的状态有d[i+1][j], dp[i+cnt[i]][j+1]<br>代表的意义就是 从第i个人与后面cnt[i]-1个人(一共cnt[i]个人) 选或不选</p>
-<p>不选:dp[i + 1][j] = max(dp[i][j], dp[i + 1][j])<br>选:dp[i + cnt[i]][j + 1] = max(dp[i][j] + cnt[i], dp[i + cnt[i]][j + 1]) (第i个人与后面cnt[i]-1个人成一只队伍)</p>
+<h2 id="解法"><a href="#解法" class="headerlink" title="解法:"></a>解法:</h2><p>t=0时:<br>先运行一遍后缀数组<br>suffix[sa[i]]有n-sa[i]+1-height[i]前缀(本质不同的子串)<br>减height[i],由height数组定义能想到有height[i]个前缀算在suffix[sa[i]-1]里面<br>只要像平衡树/权值树类似做法就能求出第k小了</p>
+<p>t=1时:<br><a href="https://www.cnblogs.com/ezoiLZH/p/9471261.html" target="_blank" rel="noopener">dalao题解</a>看了我好久才脑补出啥意思OxO<br>这里就标一下变量啥意思(代码里)<br>不详细说了<del>(口糊能力差QaQ)</del></p>
 <hr>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码:"></a>代码:</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">10</span> + <span class="number">5e3</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> dp[N], cnt[N];</span><br><span class="line"><span class="keyword">int</span> arr[N], n, k;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;n, &amp;k);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; ++i)</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;arr[i]);</span><br><span class="line">    sort(arr, arr + n);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; ++i) &#123;</span><br><span class="line">        cnt[i] = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> (cnt[i] + i &lt; n &amp;&amp; arr[cnt[i] + i] - arr[i] &lt;= <span class="number">5</span>)</span><br><span class="line">            ++cnt[i];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; ++i) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt;= k; ++j) &#123;</span><br><span class="line">            dp[i + <span class="number">1</span>][j] = max(dp[i][j], dp[i + <span class="number">1</span>][j]);</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (j + <span class="number">1</span> &lt;= k)</span><br><span class="line">                dp[i + cnt[i]][j + <span class="number">1</span>] = max(dp[i + cnt[i]][j + <span class="number">1</span>], dp[i][j] + cnt[i]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d"</span>, dp[n][k]);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<hr>
-<p><del>官方题解真丑,一堆STL</del><br><del>好像我的代码也挺丑的</del></p>
-
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码:"></a>代码:</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">using</span> ll = <span class="keyword">long</span> <span class="keyword">long</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">7</span> + <span class="number">5e5</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> rk[N], sa[N];</span><br><span class="line"><span class="keyword">int</span> pre[N], key2[N];</span><br><span class="line"><span class="keyword">int</span> nrk[N];</span><br><span class="line"><span class="keyword">int</span> n, m;</span><br><span class="line"><span class="keyword">char</span> s[N];</span><br><span class="line"><span class="keyword">int</span> height[N];</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> k, t;</span><br><span class="line">ll sum[N];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">cmp</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b, <span class="keyword">int</span> len)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (rk[a] != rk[b]) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span> (a + len &lt;= n &amp;&amp; b + len &gt; n || a + len &gt; n &amp;&amp; b + len &lt;= n) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span> (a + len &gt; n &amp;&amp; b + len &gt; n) <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">return</span> rk[a + len] == rk[b + len];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%s"</span>, s + <span class="number">1</span>);</span><br><span class="line">    n = <span class="built_in">strlen</span>(s + <span class="number">1</span>);</span><br><span class="line">    m = max(<span class="number">127</span>, n);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++i) ++pre[rk[i] = s[i]];</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= m; ++i) pre[i] += pre[i - <span class="number">1</span>];</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = n; i; --i) sa[pre[s[i]]--] = i;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> len = <span class="number">1</span>; len &lt; n; len &lt;&lt;= <span class="number">1</span>) &#123;</span><br><span class="line">        <span class="keyword">int</span> k = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = n - len + <span class="number">1</span>; i &lt;= n; ++i) key2[++k] = i;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++i) <span class="keyword">if</span> (sa[i] &gt; len) key2[++k] = sa[i] - len;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= m; ++i) pre[i] = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++i) ++pre[rk[i]];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= m; ++i) pre[i] += pre[i - <span class="number">1</span>];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = n; i; --i) &#123;</span><br><span class="line">            k = key2[i];</span><br><span class="line">            sa[pre[rk[k]]--] = k;</span><br><span class="line">        &#125;</span><br><span class="line">        k = <span class="number">1</span>;</span><br><span class="line">        nrk[sa[k]] = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">2</span>; i &lt;= n; ++i) &#123;</span><br><span class="line">            <span class="keyword">if</span> (cmp(sa[i], sa[i - <span class="number">1</span>], len)) nrk[sa[i]] = k;</span><br><span class="line">            <span class="keyword">else</span> nrk[sa[i]] = ++k;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++i)</span><br><span class="line">            rk[i] = nrk[i];</span><br><span class="line">        <span class="keyword">if</span> (k == n) <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>, j, k = <span class="number">0</span>; s[i]; ++i) &#123;</span><br><span class="line">        j = sa[rk[i] - <span class="number">1</span>];</span><br><span class="line">        <span class="keyword">if</span> (k) --k;</span><br><span class="line">        <span class="keyword">while</span> (s[j + k] == s[i + k]) ++k;</span><br><span class="line">        height[rk[i]] = k;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//以上后缀数组板子</span></span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;t, &amp;k);</span><br><span class="line">    <span class="keyword">if</span> (t) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++i)  <span class="comment">//sum[i]表示排名为1到i的后缀有多少前缀    //子串中是排名为1到i后缀的前缀</span></span><br><span class="line">            sum[i] = sum[i - <span class="number">1</span>] + n - sa[i] + <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span> (sum[n] &lt; k) &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"-1\n"</span>);</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> L = <span class="number">1</span>, R = n;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> len = <span class="number">1</span>; len &lt;= n; ++len) &#123;  <span class="comment">//枚举[L,R]内子串长度</span></span><br><span class="line">            <span class="keyword">int</span> tmp = L;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">char</span> i = <span class="string">'a'</span>; i &lt;= <span class="string">'z'</span>; ++i) &#123;</span><br><span class="line">                <span class="keyword">int</span> l = tmp - <span class="number">1</span>, r = R;   <span class="comment">//下面二分写法，如果写 l = tmp，就取不到tmp这个值</span></span><br><span class="line">                <span class="keyword">while</span> (l &lt; r) &#123;</span><br><span class="line">                    <span class="keyword">int</span> mid = l + r + <span class="number">1</span> &gt;&gt; <span class="number">1</span>;</span><br><span class="line">                    <span class="keyword">if</span> (s[sa[mid] + len - <span class="number">1</span>] &lt;= i) l = mid;</span><br><span class="line">                    <span class="keyword">else</span> r = mid - <span class="number">1</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                ll t = sum[r] - sum[tmp - <span class="number">1</span>] - <span class="number">1L</span>L * (len - <span class="number">1</span>) * (r - tmp + <span class="number">1</span>);  <span class="comment">//这个范围内有这么多子串</span></span><br><span class="line">                <span class="keyword">if</span> (r - tmp + <span class="number">1</span> &gt;= k) &#123;   <span class="comment">//[tmp, r]这个区间的后缀，长度为len的前缀都相同，数量比k多(这些前缀字典序小，所以直接输出)</span></span><br><span class="line">                    <span class="keyword">for</span> (<span class="keyword">int</span> i = sa[tmp]; i &lt; sa[tmp] + len; ++i)</span><br><span class="line">                        <span class="built_in">putchar</span>(s[i]);</span><br><span class="line">                    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">if</span> (t &gt;= k) &#123;</span><br><span class="line">                    L = tmp;</span><br><span class="line">                    R = r;</span><br><span class="line">                    k -= r - tmp + <span class="number">1</span>;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                k -= t;</span><br><span class="line">                tmp = r + <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (n - sa[L] + <span class="number">1</span> == len) ++L;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++i) &#123;</span><br><span class="line">            t = n - sa[i] + <span class="number">1</span> - height[i];</span><br><span class="line">            <span class="keyword">if</span> (t &gt;= k) &#123;</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> j = sa[i]; j &lt; sa[i] + height[i] + k; ++j)</span><br><span class="line">                    <span class="built_in">putchar</span>(s[j]);</span><br><span class="line">                <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            k -= t;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"-1\n"</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
 
       
@@ -228,11 +223,11 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">题解</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">后缀数组</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">动态规划</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">后缀自动机</a>
         		</li>
       		
 		</ul>
@@ -288,7 +283,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=https://overisac.github.io/2019/11/01/K-Balanced-Teams-cf-1133E/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=https://overisac.github.io/2020/04/26/%E6%B4%9B%E8%B0%B7p3975-%E5%BC%A6%E8%AE%BA/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -302,18 +297,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2019/11/03/2019-11-3/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          2019-11-3
-        
-      </div>
-    </a>
   
-  
-    <a href="/2019/10/30/Company/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Company(CodeForces-1062E)</div>
+    <a href="/2020/04/13/Longest-Subarray-hdu6602/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Longest Subarray(HDU-6602)</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -332,19 +318,6 @@
             </div>
         </div>
         
-        
-        <div class="toc-container tooltip-left">
-            <i class="icon-font icon-category"></i>
-            <div class="tooltip tooltip-east">
-                <span class="tooltip-item">
-                </span>
-                <span class="tooltip-content">
-                    <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#题意"><span class="toc-number">1.</span> <span class="toc-text">题意:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#解法"><span class="toc-number">2.</span> <span class="toc-text">解法:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#代码"><span class="toc-number">3.</span> <span class="toc-text">代码:</span></a></li></ol>
-                    </div>
-                </span>
-            </div>
-        </div>
         
     </div>
 </aside>
