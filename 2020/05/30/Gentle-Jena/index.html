@@ -8,15 +8,15 @@
   <link rel="dns-prefetch" href="https://overisac.github.io">
   <title>Gentle Jena | 柠檬树下蒟蒻果</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="上海理工大学2020”联想杯”的一道题因为前面某题wa9次罚时爆炸，这题又不出了卡在100名使我担惊受怕qwq题目链接">
+  <meta name="description" content="上海理工大学2020”联想杯”的一道题因为前面某题wa9次罚时爆炸(带着后面罚时增加…)这题又出不了卡在100名让我担惊受怕qwq题目链接">
 <meta name="keywords" content="算法题,单调栈,笛卡尔树">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Gentle Jena">
 <meta property="og:url" content="https:&#x2F;&#x2F;overisac.github.io&#x2F;2020&#x2F;05&#x2F;30&#x2F;Gentle-Jena&#x2F;index.html">
 <meta property="og:site_name" content="柠檬树下蒟蒻果">
-<meta property="og:description" content="上海理工大学2020”联想杯”的一道题因为前面某题wa9次罚时爆炸，这题又不出了卡在100名使我担惊受怕qwq题目链接">
+<meta property="og:description" content="上海理工大学2020”联想杯”的一道题因为前面某题wa9次罚时爆炸(带着后面罚时增加…)这题又出不了卡在100名让我担惊受怕qwq题目链接">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-05-30T14:33:24.076Z">
+<meta property="og:updated_time" content="2020-05-30T14:47:01.225Z">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="柠檬树下蒟蒻果" type="application/atom+xml">
@@ -198,7 +198,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <hr>
-<p>上海理工大学2020”联想杯”的一道题<br>因为前面某题wa9次罚时爆炸，这题又不出了<br>卡在100名使我担惊受怕qwq<br><a href="https://acm.ecnu.edu.cn/contest/270/problem/G/" target="_blank" rel="noopener">题目链接</a></p>
+<p>上海理工大学2020”联想杯”的一道题<br>因为前面某题wa9次罚时爆炸<br>(带着后面罚时增加…)<br>这题又出不了<br>卡在100名让我担惊受怕qwq<br><a href="https://acm.ecnu.edu.cn/contest/270/problem/G/" target="_blank" rel="noopener">题目链接</a></p>
 <a id="more"></a>
 <hr>
 <h2 id="题意"><a href="#题意" class="headerlink" title="题意:"></a>题意:</h2><p>由于本人太菜无法描述…<br>还请看原题</p>
@@ -206,7 +206,7 @@
 <h2 id="思路"><a href="#思路" class="headerlink" title="思路:"></a>思路:</h2><p>枚举右端点(由于强制在线,也是必须的…),当前b[i]<br>从左端点递增看很容易发现,区间值也是递增的</p>
 <p>这就很容易想到单调栈<del>(由于不会所以赛中没写出)</del><br>也可以用笛卡尔树,而且容易思考<del>(只是学会没多久不熟练写了我好久)</del></p>
 <p>找出左边第一个 b[j]&lt;=b[i] 的 j, [j+1, i]这段的值都是b[i]<br>而[1, j]这段的值不都相同,前缀和形式维护…<br>这时候计算出的a[i]中的贡献只有右端点是 i 的情况<br>a[i]+=a[i-1],就补回所有右端点的情况</p>
-<p>(以上笛卡尔树思路,单调栈思路咕咕咕)</p>
+<p>(以上笛卡尔树思路,以下也是笛卡尔树,单调栈思路咕咕咕)</p>
 <hr>
 <h2 id="代码"><a href="#代码" class="headerlink" title="代码:"></a>代码:</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ll long long</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> endl <span class="meta-string">'\n'</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> mod = <span class="number">998244353</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">3</span> + <span class="number">1e7</span>;</span><br><span class="line"></span><br><span class="line">ll n, p, x, y, z;</span><br><span class="line">ll a[N], b[N];</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> ls[N], rs[N];</span><br><span class="line"><span class="keyword">int</span> stk[N], top;</span><br><span class="line">ll pre[N], sz[N];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; n &gt;&gt; p &gt;&gt; x &gt;&gt; y &gt;&gt; z &gt;&gt; b[<span class="number">1</span>];</span><br><span class="line">    pre[<span class="number">1</span>] = a[<span class="number">1</span>] = b[<span class="number">1</span>];</span><br><span class="line">    rs[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">    stk[++top] = <span class="number">1</span>;</span><br><span class="line">    sz[<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">2</span>; i &lt;= n; ++i) &#123;</span><br><span class="line">        b[i] = (x * a[i - <span class="number">1</span>] + y * b[i - <span class="number">1</span>] + z) % p;</span><br><span class="line">        <span class="keyword">int</span> k = top;</span><br><span class="line">        <span class="keyword">while</span> (k &amp;&amp; b[stk[k]] &gt; b[i]) &#123;</span><br><span class="line">            sz[i] += sz[stk[k]];</span><br><span class="line">            --k;</span><br><span class="line">        &#125;</span><br><span class="line">        ++sz[i]; <span class="comment">//方便计算[stk[k]+1, i]多少个点,也是除掉右儿子的子树大小</span></span><br><span class="line">        a[i] = (sz[i] * b[i] + pre[stk[k]] + a[i - <span class="number">1</span>]) % mod;</span><br><span class="line">        pre[i] = (pre[stk[k]] + sz[i] * b[i]) % mod;</span><br><span class="line">        <span class="keyword">if</span> (k &lt; top) ls[i] = stk[k + <span class="number">1</span>];</span><br><span class="line">        rs[stk[k]] = i;</span><br><span class="line">        stk[++k] = i;</span><br><span class="line">        top = k;</span><br><span class="line">    &#125;</span><br><span class="line">    ll ans = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++i)</span><br><span class="line">        ans ^= a[i];</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; ans &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
@@ -551,15 +551,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">网络流</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">后缀数组</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">后缀自动机</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">网络流</a>
               </li>
             
             <div class="clearfix"></div>
