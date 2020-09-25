@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="柠檬树下蒟蒻果">
 <meta property="og:description" content="没想出要在简述这写什么emmm">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-04-28T06:22:51.957Z">
+<meta property="og:updated_time" content="2020-08-01T17:49:22.491Z">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="柠檬树下蒟蒻果" type="application/atom+xml">
@@ -55,7 +55,7 @@
 		  <h1 class="header-author"><a href="/">蒜拧孟</a></h1>
 		</hgroup>
 		
-		<p class="header-subtitle">大二学生,一条没咸鱼的梦想，队里就望着我丢人了</p>
+		<p class="header-subtitle">大三学生,一条没咸鱼的梦想，快退役了,队里最菜的快要走了qwq</p>
 		
 
 		<nav class="header-menu">
@@ -117,7 +117,7 @@
 			  <h1 class="header-author js-header-author">蒜拧孟</h1>
 			</hgroup>
 			
-			<p class="header-subtitle"><i class="icon icon-quo-left"></i>大二学生,一条没咸鱼的梦想，队里就望着我丢人了<i class="icon icon-quo-right"></i></p>
+			<p class="header-subtitle"><i class="icon icon-quo-left"></i>大三学生,一条没咸鱼的梦想，快退役了,队里最菜的快要走了qwq<i class="icon icon-quo-right"></i></p>
 			
 			
 			
@@ -209,6 +209,7 @@
 <h3 id="为什么"><a href="#为什么" class="headerlink" title="为什么:"></a>为什么:</h3><p>首先要达到每条边的流量下限<br>然后[lower,upper]是个可选择的流量区间</p>
 <p>每个点和它相连边的流量下限都要满足<br>把流入的流量下限减流出的流量下限<br>会发现这个值不一定等于0<br>但是会有一部分流入和流出的下限抵消了,也就是有一部分流量下限满足了<br>而没有抵消(也就是不等于0)的那部分,du[i]就由源点或者汇点抵消<br>当与源点或者汇点连的边跑满,就全部抵消了(剩余没抵消的流量下限也满足了),也就是存在可行方案<br>否则反之</p>
 <p>跑完最大流后,在某条边跑过去的流量,就是一个选择的值<br>这个值加上流量下限就是满足这条边的可行流量<br><del>(怎么搞出多个方案,目前不会)</del></p>
+<p>20-08-02 upd:<br>为什么和源(汇)点流入(出)的流量可以流向可选择的那部分流量?<br>因为这两种流量都是每个点,出入流量得来的<br><del>(被自己突然想出的脑残卡壳emm)</del></p>
 <hr>
 <h2 id="代码"><a href="#代码" class="headerlink" title="代码:"></a>代码:</h2><p><a href="https://loj.ac/problem/115" target="_blank" rel="noopener">模板题</a></p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">2e5</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">    <span class="keyword">int</span> next, ver;</span><br><span class="line">    <span class="keyword">int</span> flow;</span><br><span class="line">&#125; E[N];</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> head[N], tot;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> u, <span class="keyword">int</span> v, <span class="keyword">int</span> f)</span> </span>&#123;</span><br><span class="line">    E[++tot].ver = v;</span><br><span class="line">    E[tot].flow = f;</span><br><span class="line">    E[tot].next = head[u];</span><br><span class="line">    head[u] = tot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n, m;</span><br><span class="line"><span class="keyword">int</span> du[N];</span><br><span class="line"><span class="keyword">int</span> idx[N];</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> lower[N], upper[N];</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> s, t;</span><br><span class="line"></span><br><span class="line"><span class="built_in">queue</span>&lt;<span class="keyword">int</span>&gt; q;</span><br><span class="line"><span class="keyword">int</span> d[N];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">bfs</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">while</span> (q.size()) q.pop();</span><br><span class="line">    q.push(s);</span><br><span class="line">    <span class="built_in">memset</span>(d, <span class="number">0</span>, <span class="keyword">sizeof</span> d);</span><br><span class="line">    d[s] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span> (q.size()) &#123;</span><br><span class="line">        <span class="keyword">int</span> x = q.front();</span><br><span class="line">        q.pop();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = head[x]; i; i = E[i].next) &#123;</span><br><span class="line">            <span class="keyword">int</span>&amp; y = E[i].ver;</span><br><span class="line">            <span class="keyword">if</span> (!E[i].flow || d[y]) <span class="keyword">continue</span>;</span><br><span class="line">            d[y] = d[x] + <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">if</span> (y == t) <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">            q.push(y);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">dinic</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> flow)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (x == t) <span class="keyword">return</span> flow;</span><br><span class="line">    <span class="keyword">int</span> rest = flow, f;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = head[x]; i &amp;&amp; rest; i = E[i].next) &#123;</span><br><span class="line">        <span class="keyword">int</span>&amp; y = E[i].ver;</span><br><span class="line">        <span class="keyword">if</span> (d[y] == d[x] + <span class="number">1</span> &amp;&amp; E[i].flow) &#123;</span><br><span class="line">            f = dinic(y, min(rest, E[i].flow));</span><br><span class="line">            <span class="keyword">if</span> (!f) d[y] = <span class="number">0</span>;</span><br><span class="line">            E[i].flow -= f;</span><br><span class="line">            E[i ^ <span class="number">1</span>].flow += f;</span><br><span class="line">            rest -= f;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> flow - rest;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> u, v;</span><br><span class="line">    tot = <span class="number">1</span>;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;n, &amp;m);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= m; ++i) &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d%d%d%d"</span>, &amp;u, &amp;v, lower + i, upper + i);</span><br><span class="line">        add(u, v, upper[i] - lower[i]);</span><br><span class="line">        add(v, u, <span class="number">0</span>);</span><br><span class="line">        du[u] -= lower[i];</span><br><span class="line">        du[v] += lower[i];</span><br><span class="line">        idx[i] = tot;</span><br><span class="line">    &#125;</span><br><span class="line">    s = n + <span class="number">1</span>, t = n + <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++i) &#123;</span><br><span class="line">        <span class="keyword">if</span> (du[i] &lt; <span class="number">0</span>) &#123;</span><br><span class="line">            add(i, t, -du[i]);</span><br><span class="line">            add(t, i, <span class="number">0</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (du[i] &gt; <span class="number">0</span>) &#123;</span><br><span class="line">            add(s, i, du[i]);</span><br><span class="line">            add(i, s, <span class="number">0</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span> (bfs())</span><br><span class="line">        <span class="keyword">while</span> (dinic(s, (<span class="keyword">int</span>)<span class="number">1e9</span>))</span><br><span class="line">            ;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = head[s]; i; i = E[i].next)</span><br><span class="line">        <span class="keyword">if</span> (E[i].flow) &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"NO\n"</span>);</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"YES\n"</span>);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= m; ++i) </span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, lower[i] + E[idx[i]].flow);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -522,7 +523,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">并查集</a>
+                <a href="javascript:void(0)" class="js-tag color3">贪心</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -538,10 +539,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">贪心</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">二分</a>
               </li>
              
@@ -550,15 +547,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">网络流</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">并查集</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">树状数组</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">概率/期望</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">网络流</a>
               </li>
              
               <li class="article-tag-list-item">
