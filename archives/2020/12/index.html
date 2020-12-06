@@ -6,17 +6,13 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://overisac.github.io">
-  <title>Xor-Paths(CodeForces-1006F) | 柠檬树下蒟蒻果</title>
+  <title>Archives: 2020/12 | 柠檬树下蒟蒻果</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="2400的cf题,看到这个值以为很难读完题目,觉得很简单,就是双向深搜然而还是T了然后挂个fread竟然wa在样例1(╥╯^╰╥)题目链接  题意:给出n, m, k, n$\times$m的矩阵问从左上到右下有多少条路径路径上点的总异或值等于k只能往右或往下走">
-<meta name="keywords" content="算法题,题解,搜索">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Xor-Paths(CodeForces-1006F)">
-<meta property="og:url" content="https:&#x2F;&#x2F;overisac.github.io&#x2F;2019&#x2F;10&#x2F;23&#x2F;Xor-Paths&#x2F;index.html">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="柠檬树下蒟蒻果">
+<meta property="og:url" content="https:&#x2F;&#x2F;overisac.github.io&#x2F;archives&#x2F;2020&#x2F;12&#x2F;index.html">
 <meta property="og:site_name" content="柠檬树下蒟蒻果">
-<meta property="og:description" content="2400的cf题,看到这个值以为很难读完题目,觉得很简单,就是双向深搜然而还是T了然后挂个fread竟然wa在样例1(╥╯^╰╥)题目链接  题意:给出n, m, k, n$\times$m的矩阵问从左上到右下有多少条路径路径上点的总异或值等于k只能往右或往下走">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-11-29T07:07:29.136Z">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="柠檬树下蒟蒻果" type="application/atom+xml">
@@ -168,194 +164,49 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-Xor-Paths" class="article article-type-post " itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-          
+            
   
-    <h1 class="article-title" itemprop="name">
-      Xor-Paths(CodeForces-1006F)
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2020" class="archive-year">2020</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2020/12/06/2020ZSC%E6%96%B0%E7%94%9F%E8%B5%9B/" class="archive-article-date">
+  	<time datetime="2020-12-06T08:23:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-06</time>
+</a>
+        </div>
+    	 
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2020/12/06/2020ZSC%E6%96%B0%E7%94%9F%E8%B5%9B/">2020ZSC新生赛</a>
     </h1>
   
 
+        <div class="article-info info-on-right">
           
-          <a href="/2019/10/23/Xor-Paths/" class="archive-article-date">
-  	<time datetime="2019-10-23T09:07:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-23</time>
-</a>
           
-            
-            
-          
-            <span class="archive-article-date">
-                阅读量 <span id="busuanzi_value_page_pv"></span>
-            </span>
-          
-            
-            
-        </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <hr>
-<p>2400的cf题,看到这个值以为很难<br>读完题目,觉得很简单,就是双向深搜<br>然而还是T了<br><del>然后挂个fread竟然wa在样例1</del><br>(╥╯^╰╥)<br><a href="https://vjudge.net/problem/CodeForces-1006F" target="_blank" rel="noopener">题目链接</a></p>
-<hr>
-<h2 id="题意"><a href="#题意" class="headerlink" title="题意:"></a>题意:</h2><p>给出n, m, k, n$\times$m的矩阵<br>问从左上到右下有多少条路径<br>路径上点的总异或值等于k<br>只能往右或往下走</p>
-<a id="more"></a>
-<hr>
-<h2 id="解法"><a href="#解法" class="headerlink" title="解法:"></a>解法:</h2><p>由于m, n最大值是20,如果直接深搜<br>复杂度是O($2^{m+n}$),也就是$2^{40}$,妥妥的TLE<br>但是如果双向搜索,起点搜一半,终点往回搜一半<br>复杂度就会降很多,O($2^{\frac{m+n}{2}}$),也就是$2^{20}$</p>
-<hr>
-<p>路径很多,答案会爆int<br>由于有些路径在搜索的终点值一样,可以用map</p>
-<hr>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码:"></a>代码:</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ll long long</span></span><br><span class="line"></span><br><span class="line">ll mp[<span class="number">21</span>][<span class="number">21</span>];</span><br><span class="line"><span class="keyword">int</span> n, m;</span><br><span class="line">ll k;</span><br><span class="line"></span><br><span class="line"><span class="built_in">map</span>&lt;ll, <span class="keyword">int</span>&gt; s[<span class="number">21</span>][<span class="number">21</span>];     <span class="comment">//记录起点搜一半路程的异或值</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> st;</span><br><span class="line">ll ans;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs1</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y, ll sum, <span class="keyword">int</span> step)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (step &gt;= st) &#123;       <span class="comment">//一半路程返回</span></span><br><span class="line">        ++s[x][y][sum];</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (x + <span class="number">1</span> &lt; n) dfs1(x + <span class="number">1</span>, y, sum ^ mp[x + <span class="number">1</span>][y], step + <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">if</span> (y + <span class="number">1</span> &lt; m) dfs1(x, y + <span class="number">1</span>, sum ^ mp[x][y + <span class="number">1</span>], step + <span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs2</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y, ll sum)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (s[x][y].size()) &#123;   </span><br><span class="line">        <span class="keyword">if</span> (s[x][y].count(sum ^ mp[x][y] ^ k))  <span class="comment">//mp[x][y]的值会异或两次,所以再异或一次抵消</span></span><br><span class="line">            ans += s[x][y][sum ^ mp[x][y] ^ k];</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (x - <span class="number">1</span> &gt;= <span class="number">0</span>) dfs2(x - <span class="number">1</span>, y, sum ^ mp[x - <span class="number">1</span>][y]);</span><br><span class="line">    <span class="keyword">if</span> (y - <span class="number">1</span> &gt;= <span class="number">0</span>) dfs2(x, y - <span class="number">1</span>, sum ^ mp[x][y - <span class="number">1</span>]);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d%d%lld"</span>, &amp;n, &amp;m, &amp;k);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; ++i)</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; m; ++j)</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">"%lld"</span>, &amp;mp[i][j]);</span><br><span class="line">    st = n + m &gt;&gt; <span class="number">1</span>;    <span class="comment">//加号优先级大于位运算符</span></span><br><span class="line"></span><br><span class="line">    dfs1(<span class="number">0</span>, <span class="number">0</span>, mp[<span class="number">0</span>][<span class="number">0</span>], <span class="number">1</span>);</span><br><span class="line">    dfs2(n - <span class="number">1</span>, m - <span class="number">1</span>, mp[n - <span class="number">1</span>][m - <span class="number">1</span>]);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%lld"</span>, ans);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-      
 
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">算法题</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">题解</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">搜索</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-
-      
-        
-<div class="share-btn share-icons tooltip-left">
-  <div class="tooltip tooltip-east">
-    <span class="tooltip-item">
-      <a href="javascript:;" class="share-sns share-outer">
-        <i class="icon icon-share"></i>
-      </a>
-    </span>
-    <span class="tooltip-content">
-      <div class="share-wrap">
-        <div class="share-icons">
-          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
-            <i class="icon icon-weibo"></i>
-          </a>
-          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
-            <i class="icon icon-weixin"></i>
-          </a>
-          <a class="qq share-sns" href="javascript:;" data-type="qq">
-            <i class="icon icon-qq"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" data-type="douban">
-            <i class="icon icon-douban"></i>
-          </a>
-          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a>
-          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
-            <i class="icon icon-facebook"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
-            <i class="icon icon-twitter"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" data-type="google">
-            <i class="icon icon-google"></i>
-          </a>
         </div>
-      </div>
-    </span>
-  </div>
-</div>
-
-<div class="page-modal wx-share js-wx-box">
-    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=https://overisac.github.io/2019/10/23/Xor-Paths/" alt="微信分享二维码">
-    </div>
-</div>
-
-<div class="mask js-mask"></div>
-      
-      <div class="clearfix"></div>
-    </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
-
-  
-<nav id="article-nav">
-  
-    <a href="/2019/10/23/2019-10-23/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          2019-10-23
-        
-      </div>
-    </a>
   
   
-    <a href="/2019/10/22/Views-Matter/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Views Matter(CodeForces-1061B)</div>
-      <i class="icon-circle-right"></i>
-    </a>
-  
-</nav>
-
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-        <div class="toc-container tooltip-left">
-            <i class="icon-font icon-category"></i>
-            <div class="tooltip tooltip-east">
-                <span class="tooltip-item">
-                </span>
-                <span class="tooltip-content">
-                    <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#题意"><span class="toc-number">1.</span> <span class="toc-text">题意:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#解法"><span class="toc-number">2.</span> <span class="toc-text">解法:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#代码"><span class="toc-number">3.</span> <span class="toc-text">代码:</span></a></li></ol>
-                    </div>
-                </span>
-            </div>
-        </div>
-        
-    </div>
-</aside>
-
-
-
-  
-  
+    </div></section>
   
 
-  
-
-  
-
-  
+    
 
 
           </div>
@@ -391,8 +242,8 @@
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: true,
-		isArchive: false,
+		isPost: false,
+		isArchive: true,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
