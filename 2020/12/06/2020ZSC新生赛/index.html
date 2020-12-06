@@ -15,7 +15,7 @@
 <meta property="og:site_name" content="柠檬树下蒟蒻果">
 <meta property="og:description" content="一个月前就想水一篇今年新生赛的题解 写着这套题wa了几发被嘲笑 qmq">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-12-06T10:16:49.425Z">
+<meta property="og:updated_time" content="2020-12-06T12:13:43.885Z">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="柠檬树下蒟蒻果" type="application/atom+xml">
@@ -201,6 +201,7 @@
 <p>qmq</p>
 <a id="more"></a>
 
+<p><a href="https://ac.nowcoder.com/acm/contest/9250" target="_blank" rel="noopener">题目链接</a><br>${\color{white} {邀请码:zsceduacm2020y}}$</p>
 <hr>
 <h2 id="A-A题是个签到题"><a href="#A-A题是个签到题" class="headerlink" title="A-A题是个签到题"></a>A-A题是个签到题</h2><h3 id="php版"><a href="#php版" class="headerlink" title="php版"></a>php版</h3><p>最简单的方法：全选，把语言换成php，粘上去</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">******....****......****</span><br><span class="line">....*....*....*....*....</span><br><span class="line">...*.......*......*.....</span><br><span class="line">..*.........*.....*.....</span><br><span class="line">.*.......*....*....*....</span><br><span class="line">******....****......****</span><br></pre></td></tr></table></figure>
@@ -219,7 +220,7 @@
 
 <hr>
 <h2 id="D-兔子数列"><a href="#D-兔子数列" class="headerlink" title="D-兔子数列"></a>D-兔子数列</h2><p>打个表</p>
-<p>F[0]=0<br>F[1]=1<br>F[2]=1<br>F[3]=0<br>F[4]=1<br>F[5]=1</p>
+<p>F[0]=0<br>F[1]=1<br>F[2]=1<br>F[3]=0<br>F[4]=1<br>F[5]=1<br>F[6]=0<br>……</p>
 <p>很容易发现 偶奇奇 三个一循环</p>
 <p>然后就有如下代码</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">long</span> <span class="keyword">long</span> a;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%lld"</span>, &amp;a);</span><br><span class="line">    <span class="keyword">if</span> (a % <span class="number">3</span> == <span class="number">0</span>) <span class="built_in">puts</span>(<span class="string">"even"</span>);</span><br><span class="line">    <span class="keyword">else</span> <span class="built_in">puts</span>(<span class="string">"odd"</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -252,7 +253,7 @@
 
 <hr>
 <h2 id="J-深境螺旋"><a href="#J-深境螺旋" class="headerlink" title="J-深境螺旋"></a>J-深境螺旋</h2><p>dp题防ak……</p>
-<p>火火打不打原神不知道<br>反正jzk早就弃坑了….</p>
+<p>火火打不打原神不知道<br>反正jzk早就弃坑了……</p>
 <p>dp[i][0]表示打第i个boss，而且是火火打这个boss，火火消耗最小数量的原石<br>dp[i][1]表示打第i个boss，而且是jzk打这个boss，火火消耗最小数量的原石</p>
 <p>dp[i][0]可以从dp[i-1][1]和dp[i-2][1]转移过了，费用就是a[i]和a[i-1]<br>dp[i][1]可以从dp[i-1][0]和dp[i-2][0]转移过了，没有费用</p>
 <p>最终答案就是min(dp[n][0], dp[n][1])</p>
